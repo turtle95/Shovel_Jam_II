@@ -29,7 +29,7 @@ public class Stage3CamGrav : MonoBehaviour {
 	void Start(){
 		planet = GameObject.FindGameObjectWithTag ("Planet");
 		//pScript = planet.GetComponent<PlanetGravity> ();
-		Vector3 gravityUp = (transform.position - planet.transform.position).normalized;
+		Vector3 gravityUp = (planet.transform.position - transform.position ).normalized;
 
 		transform.rotation = Quaternion.FromToRotation (transform.up, gravityUp) * transform.rotation;
 		playerCenter = player.GetComponent<Transform>();
@@ -38,8 +38,9 @@ public class Stage3CamGrav : MonoBehaviour {
 
 	void Update(){
 			//pScript.Attract (transform, downLooker);
-		Vector3 gravityUp = (transform.position - planet.transform.position).normalized;
-		Vector3 turdsUp = downLooker.up;
+		//Vector3 gravityUp = (transform.position - planet.transform.position).normalized;
+        Vector3 gravityUp = (planet.transform.position - transform.position).normalized;
+        Vector3 turdsUp = downLooker.up;
 		Quaternion targetRotation = Quaternion.FromToRotation (turdsUp, gravityUp) * downLooker.rotation;
 		downLooker.rotation = Quaternion.Slerp (downLooker.rotation, targetRotation, 50 * Time.deltaTime);
 		transform.rotation = Quaternion.FromToRotation (transform.up, gravityUp) * transform.rotation;

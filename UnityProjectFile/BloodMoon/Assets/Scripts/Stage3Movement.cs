@@ -10,7 +10,7 @@ public class Stage3Movement : MonoBehaviour {
 	public float refWalkSpeed;
 	public float gravity = -10;
 	public float turnSpeed = 0.1f;
-	public CameraController camScript;
+	//public CameraController camScript;
 
 	Vector3 movement;
 	private Rigidbody rb;
@@ -167,9 +167,10 @@ public class Stage3Movement : MonoBehaviour {
 	public void WorldGravity()
 	{
 		//gets the distance between player and planet, essentially this is the direction you want to be facing
-		gravityUp = (transform.position - planet.position).normalized;
-		//the up direction for the player
-		Vector3 turdsUp = transform.up;
+		//gravityUp = (transform.position - planet.position).normalized;
+        gravityUp = (planet.position - transform.position ).normalized;
+        //the up direction for the player
+        Vector3 turdsUp = transform.up;
 
 		//applies gravity based on the player's local down
 		rb.AddForce(turdsUp * gravity);
