@@ -136,7 +136,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 325324086}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -335, y: 1.7699966, z: 715}
+  m_LocalPosition: {x: -29.49, y: 1.7699966, z: 314.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1717044204}
@@ -255,7 +255,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1242990821}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -927, y: 1.77, z: 33}
+  m_LocalPosition: {x: -309.3, y: -49, z: 33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1717044204}
@@ -314,15 +314,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9e06e886690394f4daeced17978deb0c, type: 3}
       propertyPath: m_LocalScale.x
-      value: 56.38237
+      value: 20.357983
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9e06e886690394f4daeced17978deb0c, type: 3}
       propertyPath: m_LocalScale.y
-      value: 56.38237
+      value: 20.357983
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9e06e886690394f4daeced17978deb0c, type: 3}
       propertyPath: m_LocalScale.z
-      value: 56.38237
+      value: 20.357983
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 9e06e886690394f4daeced17978deb0c, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -385,6 +385,7 @@ MonoBehaviour:
   stamina: {fileID: 1374875687770050, guid: 51213558d5b1d4b4d8188f5d05c5804f, type: 2}
   health: {fileID: 1214616662906260, guid: 5603216ae61d9914baf64db83335de69, type: 2}
   knowlege: {fileID: 1323584545433340, guid: efd2a7a96bca059449f552bc99558bdb, type: 2}
+  amountToSpawn: 010000000100000001000000
 --- !u!1001 &1926790109
 Prefab:
   m_ObjectHideFlags: 0
@@ -398,7 +399,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4554641817097802, guid: e23aec3fb8075fc499ee352971eaf2ba, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 64.5
+      value: -243
       objectReference: {fileID: 0}
     - target: {fileID: 4554641817097802, guid: e23aec3fb8075fc499ee352971eaf2ba, type: 2}
       propertyPath: m_LocalPosition.z
@@ -428,7 +429,8 @@ Prefab:
         type: 2}
       propertyPath: rock
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1257547778302444, guid: 563e1756787868c4291ed42fa9e734b5,
+        type: 2}
     - target: {fileID: 114708754691857512, guid: e23aec3fb8075fc499ee352971eaf2ba,
         type: 2}
       propertyPath: planet
@@ -526,7 +528,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2145929755}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 794, y: 1.7699966, z: 144}
+  m_LocalPosition: {x: 214.1, y: 1.7699966, z: -252.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1717044204}
