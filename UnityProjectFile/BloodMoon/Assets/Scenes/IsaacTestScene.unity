@@ -1133,6 +1133,7 @@ MonoBehaviour:
   startingEnergy: 1000
   currentEnergy: 0
   energySlider: {fileID: 642262687}
+  sun: {fileID: 2031063226}
 --- !u!1 &2031063223
 GameObject:
   m_ObjectHideFlags: 0
@@ -1142,6 +1143,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2031063225}
   - component: {fileID: 2031063224}
+  - component: {fileID: 2031063226}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -1199,6 +1201,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &2031063226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2031063223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 886c39a2a8a0341db818b298db62efd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isNight: 0
 --- !u!1 &2145929755
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,6 +17,8 @@ public class PlayerHealth : MonoBehaviour
 	public int startingEnergy = 1000;
 	public int currentEnergy;
 	public Slider energySlider;
+
+    public DayNightCycle sun;
 	
     // Animator anim;                                              // Reference to the Animator component.
     // AudioSource playerAudio;                                    // Reference to the AudioSource component.
@@ -93,11 +95,18 @@ public class PlayerHealth : MonoBehaviour
 		currentEnergy -= amount;
 		energySlider.value = currentEnergy;
 
-		if (currentEnergy <= 0 /*and is night*/)  {	// TODO check if it is night
+		if (currentEnergy <= 0 && sun.isNight)  {
 			// TODO have player collapse and spiders surround him.
+            Death();
 		}
-		else if (currentEnergy <= 0 /*and is not night*/) {	// TODO check if it is not night
-			// TODO have player collapse and change it to night.
+		else if (currentEnergy <= 0 && !sun.isNight) {	
+			// TODO have player collapse
+
+            // TODO wait a few seconds for animation
+            currentEnergy = startingEnergy;
+            energySlider.value = currentEnergy;
+
+            sun.ChangeToNight();
 		}
 	}
 
