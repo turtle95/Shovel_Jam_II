@@ -43,6 +43,12 @@ public class Stage3Movement : MonoBehaviour {
 
 	public GameObject infectedFog;
 
+
+
+    public float jumpForce = 30f;
+
+    public float runSpeed = 25f;
+
 	void Start () {
 		rb = GetComponent<Rigidbody> (); //assigns rb to the player's rigidbody
 		refWalkSpeed = walkSpeed;
@@ -61,19 +67,7 @@ public class Stage3Movement : MonoBehaviour {
 		cameraYOnly.localEulerAngles = new Vector3 (cameraYOnly.localEulerAngles.x, cameraBox.localEulerAngles.y, cameraYOnly.localEulerAngles.z);
 
 
-		//supposed to rotate the player model in relation to cameraYonly's forward direction, only along the y axis ...Out of Comission
-		/*if (!(movement.x == 0) || !(movement.z == 0)) 
-		{
-		//if pressing forward, set a value to 0 so that you can face forwards
-			float tempZ = movement.z;
-			if (movement.z > 0)
-				tempZ = 0;
-
-			//find an angle to rotate to based on input, two ways of doing it both give same result...diagnal angles don't work
-			//Vector3 newRot = (new Vector3 (0, (movement.x * 90), 0) + new Vector3 (0, (tempZ * 180), 0));
-			Vector3 newDir = Vector3.Slerp (new Vector3 (0, (movement.x *180), 0), new Vector3 (0, (tempZ * 360), 0), 0.5f);
-			mover.localEulerAngles = newDir + cameraYOnly.localEulerAngles;
-		}*/
+		
 
 
 
@@ -106,18 +100,37 @@ public class Stage3Movement : MonoBehaviour {
 		}
 
 
-		if (Input.GetButtonDown ("Jump")) {
+		if (Input.GetButtonDown ("Fire2")) {
             audManager.PlayOneShot(dashSound);
 			rb.AddForce(movement *dashDistance, ForceMode.VelocityChange);
-			dashParticles.Play ();
-			dashParticles2.Play ();
+			//dashParticles.Play ();
+		//	dashParticles2.Play ();
 		}
-			
+
+        if (Input.GetButtonDown("Jump"))
+        {
+           // audManager.PlayOneShot(dashSound);
+            rb.AddForce(transform.up * jumpForce, ForceMode.VelocityChange);
+          //  dashParticles.Play();
+          //  dashParticles2.Play();
+        }
+
+        if (Input.GetButtonDown("Fire3"))
+        {
+            // audManager.PlayOneShot(dashSound);
+            walkSpeed = runSpeed;
+           // dashParticles.Play();
+           // dashParticles2.Play();
+        }
+        if (Input.GetButtonUp("Fire3"))
+        {
+            walkSpeed = refWalkSpeed;
+        }
 
 
 
-		//if you are looking down at the right angle and you fire and you are not high enough up to be in a fast fall then shoot yourself upwards
-		if (cScript.lookingDown && Input.GetButtonUp ("Fire1") && NotFastFall()) {
+        //if you are looking down at the right angle and you fire and you are not high enough up to be in a fast fall then shoot yourself upwards
+        if (cScript.lookingDown && Input.GetButtonUp ("Fire1") && NotFastFall()) {
 			rb.AddForce (transform.up * maxFlyHeight, ForceMode.VelocityChange);
 		}
 
