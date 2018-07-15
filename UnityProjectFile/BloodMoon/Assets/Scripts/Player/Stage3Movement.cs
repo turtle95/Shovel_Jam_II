@@ -39,7 +39,10 @@ public class Stage3Movement : MonoBehaviour {
 	public float maxFlyHeight = 2.5f;
 
     public AudioSource audManager;
+    public AudioSource footstepManager;
     public AudioClip dashSound;
+    public AudioClip walkingSound;
+    public AudioClip jumpSound;
 
 	public GameObject infectedFog;
 
@@ -54,7 +57,6 @@ public class Stage3Movement : MonoBehaviour {
 		refWalkSpeed = walkSpeed;
 		Cursor.lockState = CursorLockMode.Locked;
 	}
-		
 
 	void FixedUpdate () {
 		//rotates the player based on its relation to the planet, applies gravity
@@ -65,15 +67,27 @@ public class Stage3Movement : MonoBehaviour {
 
 		//rotates an empty game object so that it matches up with the camera only on the y axis
 		cameraYOnly.localEulerAngles = new Vector3 (cameraYOnly.localEulerAngles.x, cameraBox.localEulerAngles.y, cameraYOnly.localEulerAngles.z);
-
-
 		
 
 
 
 		if (!(movement.x == 0 && movement.z == 0)) {
-			//normalize the vector so we can use trigonometry
-			Vector3 rotVec = new Vector3(movement.z, movement.x, 0).normalized;
+            if (Grounded() == true && footstepManager.isPlaying == false)
+            {
+                if (Input.GetButtonDown("Fire3"))
+                {
+                    footstepManager.pitch = Random.Range(1.8f, 2.5f);
+                }
+                else
+                {
+                    footstepManager.pitch = Random.Range(.8f, 1.1f);
+                }
+                footstepManager.volume = Random.Range(.8f, 1f);
+                footstepManager.Play();
+            }
+
+            //normalize the vector so we can use trigonometry
+            Vector3 rotVec = new Vector3(movement.z, movement.x, 0).normalized;
 
 			//just for the z rotation
 			float rotDegree = (Mathf.Acos(rotVec.x/1)) * 180f/Mathf.PI;
@@ -109,7 +123,7 @@ public class Stage3Movement : MonoBehaviour {
 
         if (Input.GetButtonDown("Jump"))
         {
-           // audManager.PlayOneShot(dashSound);
+           audManager.PlayOneShot(jumpSound);
             rb.AddForce(transform.up * jumpForce, ForceMode.VelocityChange);
           //  dashParticles.Play();
           //  dashParticles2.Play();
@@ -117,7 +131,6 @@ public class Stage3Movement : MonoBehaviour {
 
         if (Input.GetButtonDown("Fire3"))
         {
-            // audManager.PlayOneShot(dashSound);
             walkSpeed = runSpeed;
            // dashParticles.Play();
            // dashParticles2.Play();

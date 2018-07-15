@@ -18,6 +18,11 @@ public class PlayerHealth : MonoBehaviour
 	public int currentEnergy;
 	public Slider energySlider;
 
+    public AudioSource audManager;
+    public AudioClip deathSound;
+    public AudioClip hurtSound;
+    public AudioClip nightJingle;
+
     public DayNightCycle sun;
 	
     // Animator anim;                                              // Reference to the Animator component.
@@ -80,12 +85,13 @@ public class PlayerHealth : MonoBehaviour
         healthSlider.value = currentHealth;
 
         // Play the hurt sound effect.
-        // playerAudio.Play ();
+        audManager.PlayOneShot(hurtSound);
 
         // If the player has lost all it's health and the death flag hasn't been set yet...
         if(currentHealth <= 0 && !isDead)
         {
             // ... it should die.
+            audManager.PlayOneShot(deathSound);
             Death ();
         }
     }
@@ -96,13 +102,15 @@ public class PlayerHealth : MonoBehaviour
 		energySlider.value = currentEnergy;
 
 		if (currentEnergy <= 0 && sun.isNight)  {
-			// TODO have player collapse and spiders surround him.
+            // TODO have player collapse and spiders surround him.
+            audManager.PlayOneShot(deathSound);
             Death();
 		}
-		else if (currentEnergy <= 0 && !sun.isNight) {	
-			// TODO have player collapse
+		else if (currentEnergy <= 0 && !sun.isNight) {
+            // TODO have player collapse
 
             // TODO wait a few seconds for animation
+            audManager.PlayOneShot(nightJingle);
             currentEnergy = startingEnergy;
             energySlider.value = currentEnergy;
 

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.5748171, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1094,46 +1094,29 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 114145251269148670, guid: e23aec3fb8075fc499ee352971eaf2ba,
-        type: 2}
-      propertyPath: rock
-      value: 
-      objectReference: {fileID: 1257547778302444, guid: 563e1756787868c4291ed42fa9e734b5,
-        type: 2}
     - target: {fileID: 114708754691857512, guid: e23aec3fb8075fc499ee352971eaf2ba,
         type: 2}
       propertyPath: planet
       value: 
       objectReference: {fileID: 475950351}
+    - target: {fileID: 114737546940894270, guid: e23aec3fb8075fc499ee352971eaf2ba,
+        type: 2}
+      propertyPath: healthSlider
+      value: 
+      objectReference: {fileID: 701864773}
+    - target: {fileID: 114737546940894270, guid: e23aec3fb8075fc499ee352971eaf2ba,
+        type: 2}
+      propertyPath: energySlider
+      value: 
+      objectReference: {fileID: 642262687}
+    - target: {fileID: 114737546940894270, guid: e23aec3fb8075fc499ee352971eaf2ba,
+        type: 2}
+      propertyPath: sun
+      value: 
+      objectReference: {fileID: 2031063226}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e23aec3fb8075fc499ee352971eaf2ba, type: 2}
   m_IsPrefabAsset: 0
---- !u!1 &1926790110 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1758674097045392, guid: e23aec3fb8075fc499ee352971eaf2ba,
-    type: 2}
-  m_PrefabInternal: {fileID: 1926790109}
---- !u!114 &1926790111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1926790110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c115a8d44c3744868d100573afd3316, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingHealth: 100
-  currentHealth: 0
-  healthSlider: {fileID: 701864773}
-  damageImage: {fileID: 0}
-  flashSpeed: 5
-  flashColour: {r: 1, g: 0, b: 0, a: 0.1}
-  startingEnergy: 1000
-  currentEnergy: 0
-  energySlider: {fileID: 642262687}
-  sun: {fileID: 2031063226}
 --- !u!1 &2031063223
 GameObject:
   m_ObjectHideFlags: 0
