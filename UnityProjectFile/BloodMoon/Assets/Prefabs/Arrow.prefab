@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 65914267256526696}
   - component: {fileID: 114143997353943410}
   - component: {fileID: 54678188629314122}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4497559020617428}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DownLooker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
