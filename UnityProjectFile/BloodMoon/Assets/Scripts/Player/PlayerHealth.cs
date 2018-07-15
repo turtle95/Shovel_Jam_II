@@ -47,8 +47,8 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = startingHealth;
 		currentEnergy = startingEnergy;
 
-		healthSlider.value = currentHealth;
-		energySlider.value = currentEnergy;
+		//healthSlider.value = currentHealth;
+		//energySlider.value = currentEnergy;
     }
 
 
@@ -81,8 +81,8 @@ public class PlayerHealth : MonoBehaviour
         // Reduce the current health by the damage amount.
         currentHealth -= amount;
 
-        // Set the health bar's value to the current health.
-        healthSlider.value = currentHealth;
+        //// Set the health bar's value to the current health.
+        //healthSlider.value = currentHealth;
 
         // Play the hurt sound effect.
         audManager.PlayOneShot(hurtSound);
@@ -99,14 +99,14 @@ public class PlayerHealth : MonoBehaviour
 	public void LoseEnergy (int amount) 
 	{
 		currentEnergy -= amount;
-		energySlider.value = currentEnergy;
+		//energySlider.value = currentEnergy;
 
-		if (currentEnergy <= 0 && sun.isNight)  {
+		if (currentEnergy <= 0) {// && sun.isNight)  {
             // TODO have player collapse and spiders surround him.
             audManager.PlayOneShot(deathSound);
             Death();
 		}
-		else if (currentEnergy <= 0 && !sun.isNight) {
+		else if (currentEnergy <= 0) {// && !sun.isNight) {
             // TODO have player collapse
 
             // TODO wait a few seconds for animation
