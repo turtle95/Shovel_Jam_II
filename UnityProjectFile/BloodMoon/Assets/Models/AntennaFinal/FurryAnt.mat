@@ -55,29 +55,29 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Brightness: 2
+    - _Brightness: 1.24
     - _BumpScale: 1
     - _Cutoff: 0.5
-    - _Density: 2
+    - _Density: 0.69
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
-    - _Length: 0.596
+    - _Length: 0.001
     - _Metallic: 0
     - _MinimumThreshold: 0
     - _Mode: 0
-    - _Occlusion: 0.996
+    - _Occlusion: 0.82
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _WindSpeed: 6.95
+    - _WindSpeed: 10
     - _WorldGravity: 0.724
-    - _WorldWind: 0.091
+    - _WorldWind: 0
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
