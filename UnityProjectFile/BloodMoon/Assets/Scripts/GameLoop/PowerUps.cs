@@ -7,7 +7,7 @@ public class PowerUps : MonoBehaviour {
     //determines the powerup type
     public int id = 1;
     variableTracker varTrack;
-
+    
 
     void Start()
     {
@@ -20,26 +20,26 @@ public class PowerUps : MonoBehaviour {
             switch(id)
             {
                 case 1: // stamina
-                    varTrack.stamina += 5;
-                    varTrack.maxStam += 10;
+                    varTrack.AddStamina();
                     break; 
 
                 case 2: // health
-                    varTrack.health += 5;
-                    varTrack.health += 6;
+                    varTrack.AddHealth();
                     break; 
 
                 case 3: // knowledge
-                    varTrack.speed += 1;
+                    varTrack.AddSpeed();
                     // gain knowledge information
                     break;
                 case 4: //shovelGun
-                    other.gameObject.GetComponentInParent<FireRocks > ().bulletType = 2;
+                    varTrack.GrabWeapon(1);
+                    other.gameObject.GetComponentInParent<FireRocks>().SwitchBullets(2);
                     other.gameObject.GetComponentInParent<FireRocks>().ammo = 5;
                     //gain Knoledge
                     break;
                 case 5: //Crossiant Gun
-                    other.gameObject.GetComponentInParent<FireRocks>().bulletType = 3;
+                    varTrack.GrabWeapon(2);
+                    other.gameObject.GetComponentInParent<FireRocks>().SwitchBullets(3);
                     other.gameObject.GetComponentInParent<FireRocks>().ammo = 15;
                     //gain knowledge
                     break;

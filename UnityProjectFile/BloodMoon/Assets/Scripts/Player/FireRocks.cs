@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FireRocks : MonoBehaviour {
 
@@ -24,12 +25,8 @@ public class FireRocks : MonoBehaviour {
     public AudioClip shootSound;
 //	float chargedLaunch = 0;
     public float rockDisappearTime = 10;
-	// Use this for initialization
-	void Start () {
-//		chargedLaunch = initialCharge;
-		//lineDraw = GameObject.FindGameObjectWithTag ("RockLine");
-		//lineDraw.SetActive (false);
-	}
+
+    public Text ammoCount;
 	
 	// Update is called once per frame
 	void Update () {
@@ -44,11 +41,18 @@ public class FireRocks : MonoBehaviour {
 
         if (Input.GetButton("Fire1"))
         {
+            if (bulletType == 2) { }
             if (shovelCharge < 2.5f)
-                shovelCharge += Time.deltaTime;
+                shovelCharge += Time.deltaTime *2;
+
+            if (bulletType == 3)
+            {
+                ammo -= Time.deltaTime;
+            }
         }
 
-        if (Input.GetButtonUp ("Fire1")) { //If someone presses Fire1 then spawn a rock at the spawn point and give it a launch speed
+        if (Input.GetButtonUp ("Fire1"))
+        { //If someone presses Fire1 then spawn a rock at the spawn point and give it a launch speed
 
             switch (bulletType)
             {
@@ -64,6 +68,7 @@ public class FireRocks : MonoBehaviour {
                     rb = rockUsedHere.GetComponent<Rigidbody>();
                     rb.velocity = spawnPoint.forward * launchSpeed * shovelCharge;
                     shovelCharge = 0;
+                    ammo -= 1;
                     shovelJavelin.SetActive(false);
                     break;
                 case 3:
@@ -74,6 +79,8 @@ public class FireRocks : MonoBehaviour {
                     break;
             }
 
+           
+           
             //audManager.PlayOneShot(shootSound);
 			//rockUsedHere = Instantiate (rock, spawnPoint.position, spawnPoint.rotation);
 			//rockUsedHere.transform.localScale *= rockSize;
@@ -87,22 +94,33 @@ public class FireRocks : MonoBehaviour {
         //remove the game obj after x sec
         Destroy(this.rockUsedHere, rockDisappearTime);
 
-	}
+        if (ammo <= 0 && (bulletType == 2 || bulletType == 3))
+        {
+            SwitchBullets(1);
+        }
+
+        float tempAmmo = Mathf.Round(ammo);
+        ammoCount.text = ("Ammo: " + tempAmmo.ToString());
+    }
 
 
     public void SwitchBullets(int chosen)
     {
+        bulletType = chosen;
         switch (chosen)
         {
             case 1:
                 shovelJavelin.SetActive(false);
                 juiceSpray.SetActive(false);
+              
                 break;
             case 2:
                 juiceSpray.SetActive(false);
+                
                 break;
             case 3:
                 shovelJavelin.SetActive(false);
+               
                 break;
         }
     }
