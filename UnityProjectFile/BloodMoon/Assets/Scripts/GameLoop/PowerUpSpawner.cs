@@ -9,6 +9,8 @@ public class PowerUpSpawner : MonoBehaviour {
     public GameObject stamina;
     public GameObject health;
     public GameObject knowlege;
+    public GameObject shovel;
+    public GameObject crossiont;
     public int[] amountToSpawn;
     List<bool> spawnFilled = new List<bool>();
 
@@ -34,7 +36,7 @@ public class PowerUpSpawner : MonoBehaviour {
                 Destroy(powerUps[n]);
         }
 
-        for (int k = 0; k < 3; k++)
+        for (int k = 0; k < 5; k++)
         {
             for (int i = 0; i < amountToSpawn[k]; i++)
             {
@@ -57,6 +59,14 @@ public class PowerUpSpawner : MonoBehaviour {
                         break;
                     case 2:
                         Instantiate(knowlege, spawnPoints[j].transform.position, spawnPoints[j].transform.rotation);
+                        spawnFilled[j] = true;
+                        break;
+                    case 3:
+                        Instantiate(shovel, spawnPoints[j].transform.position, spawnPoints[j].transform.rotation);
+                        spawnFilled[j] = true;
+                        break;
+                    case 4:
+                        Instantiate(crossiont, spawnPoints[j].transform.position, spawnPoints[j].transform.rotation);
                         spawnFilled[j] = true;
                         break;
                 }

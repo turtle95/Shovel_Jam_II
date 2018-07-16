@@ -4,9 +4,12 @@ using System.Collections;
 
 public class PlayerHealth : MonoBehaviour
 {
+
+    variableTracker varTrack;
+
 	// Health
-    public int startingHealth = 100;                            // The amount of health the player starts the game with.
-    public int currentHealth;                                   // The current health the player has.
+    public float startingHealth = 10;                            // The amount of health the player starts the game with.
+    public float currentHealth;                                   // The current health the player has.
     public Slider healthSlider;                                 // Reference to the UI's health bar.
     public Image damageImage;                                   // Reference to an image to flash on the screen on being hurt.
     // public AudioClip deathClip;                                 // The audio clip to play when the player dies.
@@ -14,8 +17,8 @@ public class PlayerHealth : MonoBehaviour
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);     // The colour the damageImage is set to, to flash.
 
 	// Energy
-	public int startingEnergy = 1000;
-	public int currentEnergy;
+	public float startingEnergy = 100;
+	public float currentEnergy;
 	public Slider energySlider;
 
     public AudioSource audManager;
@@ -34,6 +37,12 @@ public class PlayerHealth : MonoBehaviour
     bool isDead;                                                // Whether the player is dead.
     bool damaged;                                               // True when the player gets damaged.
 
+    public int energyLoss = 1;
+
+    private void Start()
+    {
+        varTrack = GameObject.Find("variableTracker").GetComponent<variableTracker>();
+    }
 
     void Awake ()
     {
@@ -54,7 +63,7 @@ public class PlayerHealth : MonoBehaviour
 
     void Update ()
     {
-        LoseEnergy(1);
+        LoseEnergy(energyLoss);
         // If the player has just been damaged...
         if(damaged)
         {
@@ -98,11 +107,12 @@ public class PlayerHealth : MonoBehaviour
 
 	public void LoseEnergy (int amount) 
 	{
-		currentEnergy -= amount;
-		//energySlider.value = currentEnergy;
+		energySlider.value = currentEnergy;
+		currentEnergy -= amount * Time.deltaTime;
 
 		if (currentEnergy <= 0) {// && sun.isNight)  {
             // TODO have player collapse and spiders surround him.
+            sun.ChangeToMorning();
             audManager.PlayOneShot(deathSound);
             Death();
 		}
