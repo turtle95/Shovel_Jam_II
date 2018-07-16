@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4510285925650264}
   - component: {fileID: 33938391011891008}
   - component: {fileID: 23473679974792712}
+  - component: {fileID: 64463248040666550}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -36,6 +37,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4866700946989326}
+  - component: {fileID: 64616693318993706}
   m_Layer: 0
   m_Name: ColoredHubble
   m_TagString: Untagged
@@ -112,3 +114,31 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1477914423653524}
   m_Mesh: {fileID: 4300000, guid: 6561274aa087f02458699e7e1803031f, type: 3}
+--- !u!64 &64463248040666550
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1477914423653524}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 6561274aa087f02458699e7e1803031f, type: 3}
+--- !u!64 &64616693318993706
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1948281400484430}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 0}

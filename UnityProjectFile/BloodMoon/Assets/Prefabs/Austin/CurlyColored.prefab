@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4112215141888058}
   - component: {fileID: 33051625864729352}
   - component: {fileID: 23181353635220108}
+  - component: {fileID: 64226553438749758}
   m_Layer: 0
   m_Name: pSphere2
   m_TagString: Untagged
@@ -36,6 +37,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4759792470138040}
+  - component: {fileID: 64460022105139196}
   m_Layer: 0
   m_Name: CurlyColored
   m_TagString: Untagged
@@ -112,3 +114,31 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1410898252284234}
   m_Mesh: {fileID: 4300000, guid: 7dd334d184584a94f823ca258c70f555, type: 3}
+--- !u!64 &64226553438749758
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1410898252284234}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 7dd334d184584a94f823ca258c70f555, type: 3}
+--- !u!64 &64460022105139196
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1878268385071632}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 0}
