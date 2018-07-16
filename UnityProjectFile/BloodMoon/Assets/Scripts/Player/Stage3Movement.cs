@@ -52,7 +52,11 @@ public class Stage3Movement : MonoBehaviour {
 
     public float runSpeed = 25f;
 
+    //Ref to playerHealth for energy
+    public PlayerHealth hScript;
+
 	void Start () {
+        
 		rb = GetComponent<Rigidbody> (); //assigns rb to the player's rigidbody
 		refWalkSpeed = walkSpeed;
 		Cursor.lockState = CursorLockMode.Locked;
@@ -115,6 +119,7 @@ public class Stage3Movement : MonoBehaviour {
 
 
 		if (Input.GetButtonDown ("Fire2")) {
+            hScript.currentEnergy -= 10;
             audManager.PlayOneShot(dashSound);
 			rb.AddForce(movement *dashDistance, ForceMode.VelocityChange);
 			//dashParticles.Play ();
@@ -123,7 +128,8 @@ public class Stage3Movement : MonoBehaviour {
 
         if (Input.GetButtonDown("Jump"))
         {
-           audManager.PlayOneShot(jumpSound);
+            hScript.currentEnergy -= 5;
+            audManager.PlayOneShot(jumpSound);
             rb.AddForce(transform.up * jumpForce, ForceMode.VelocityChange);
           //  dashParticles.Play();
           //  dashParticles2.Play();
@@ -132,11 +138,14 @@ public class Stage3Movement : MonoBehaviour {
         if (Input.GetButtonDown("Fire3"))
         {
             walkSpeed = runSpeed;
+            hScript.energyLoss = 2;
            // dashParticles.Play();
            // dashParticles2.Play();
         }
+
         if (Input.GetButtonUp("Fire3"))
         {
+            hScript.energyLoss = 1;
             walkSpeed = refWalkSpeed;
         }
 

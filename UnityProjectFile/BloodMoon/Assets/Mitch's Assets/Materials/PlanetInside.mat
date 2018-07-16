@@ -83,7 +83,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture3:
-        m_Texture: {fileID: 2800000, guid: 03a73f721d807d2409a52801098372f4, type: 3}
+        m_Texture: {fileID: 2800000, guid: e8d1ec33dab9a494b82e0e95b5428e19, type: 3}
         m_Scale: {x: 15, y: 15}
         m_Offset: {x: 0, y: 0}
     - _Texture3Bump:
@@ -91,7 +91,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture4:
-        m_Texture: {fileID: 2800000, guid: 489c53486017e9c4ba2e0b426cf173ff, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7f78d33bfda5bcb48a10b4403adfbf0b, type: 3}
         m_Scale: {x: 30, y: 30}
         m_Offset: {x: 0, y: 0}
     - _Texture5:
