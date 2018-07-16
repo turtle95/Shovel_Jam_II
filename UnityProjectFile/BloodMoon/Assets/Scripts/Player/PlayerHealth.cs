@@ -4,8 +4,11 @@ using System.Collections;
 
 public class PlayerHealth : MonoBehaviour
 {
+
+    variableTracker varTrack;
+
 	// Health
-    public float startingHealth = 100;                            // The amount of health the player starts the game with.
+    public float startingHealth = 10;                            // The amount of health the player starts the game with.
     public float currentHealth;                                   // The current health the player has.
     public Slider healthSlider;                                 // Reference to the UI's health bar.
     public Image damageImage;                                   // Reference to an image to flash on the screen on being hurt.
@@ -14,7 +17,7 @@ public class PlayerHealth : MonoBehaviour
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);     // The colour the damageImage is set to, to flash.
 
 	// Energy
-	public float startingEnergy = 1000;
+	public float startingEnergy = 100;
 	public float currentEnergy;
 	public Slider energySlider;
 
@@ -34,6 +37,12 @@ public class PlayerHealth : MonoBehaviour
     bool isDead;                                                // Whether the player is dead.
     bool damaged;                                               // True when the player gets damaged.
 
+    public int energyLoss = 1;
+
+    private void Start()
+    {
+        varTrack = GameObject.Find("variableTracker").GetComponent<variableTracker>();
+    }
 
     void Awake ()
     {
@@ -54,7 +63,7 @@ public class PlayerHealth : MonoBehaviour
 
     void Update ()
     {
-        LoseEnergy(1);
+        LoseEnergy(energyLoss);
         // If the player has just been damaged...
         if(damaged)
         {
@@ -103,6 +112,7 @@ public class PlayerHealth : MonoBehaviour
 
 		if (currentEnergy <= 0 && sun.isNight)  {
             // TODO have player collapse and spiders surround him.
+            sun.ChangeToMorning();
             audManager.PlayOneShot(deathSound);
             Death();
 		}

@@ -21,7 +21,7 @@ public class DayNightCycle : MonoBehaviour {
 
 
 	public void ChangeToNight () {
-		isNight = !isNight;
+		isNight = true;
 	}
 
 	public void ChangeToMorning () {
