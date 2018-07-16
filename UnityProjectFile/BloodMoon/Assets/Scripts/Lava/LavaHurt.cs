@@ -7,6 +7,7 @@ public class LavaHurt : MonoBehaviour
 
     public Collider playerCollider;
     public PlayerHealth playerHealth;
+    public int hurtAmount = 5;
     public float hurtTimeInterval = 1f;
 
     private bool hurtScreenActive = false;
@@ -26,7 +27,7 @@ public class LavaHurt : MonoBehaviour
             if (Time.time - hurtTimeStart > hurtTimeInterval)
             {
                 //Debug.Log("calling TakeDamage vz");
-                playerHealth.TakeDamage(5);
+                playerHealth.TakeDamage(hurtAmount);
                 hurtTimeStart = Time.time;
             }
         }

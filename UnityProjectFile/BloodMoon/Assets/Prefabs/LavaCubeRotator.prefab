@@ -270,4 +270,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCollider: {fileID: 0}
   playerHealth: {fileID: 0}
+  hurtAmount: 2
   hurtTimeInterval: 1
