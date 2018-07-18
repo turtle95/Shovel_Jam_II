@@ -62,7 +62,7 @@ public class Stage3Movement : MonoBehaviour {
 		Cursor.lockState = CursorLockMode.Locked;
 	}
 
-	void FixedUpdate () {
+	void Update () {
 		//rotates the player based on its relation to the planet, applies gravity
 		WorldGravity();
 
