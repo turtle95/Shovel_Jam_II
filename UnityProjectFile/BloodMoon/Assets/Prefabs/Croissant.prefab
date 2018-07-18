@@ -90,9 +90,10 @@ GameObject:
   - component: {fileID: 65276635361711352}
   - component: {fileID: 114520908379755822}
   - component: {fileID: 54984662674040152}
+  - component: {fileID: 114851547131872060}
   m_Layer: 10
   m_Name: Croissant
-  m_TagString: Untagged
+  m_TagString: Croissant
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -352,6 +353,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   downLooker: {fileID: 4329398363589608}
   gravity: -10
+--- !u!114 &114851547131872060
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1339633003125278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbf485492fedf904dab99d9b28899bc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &198160844627762602
 ParticleSystem:
   m_ObjectHideFlags: 1

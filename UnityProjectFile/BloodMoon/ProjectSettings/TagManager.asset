@@ -8,6 +8,8 @@ TagManager:
   - Spawner
   - PowerUp
   - Bullet
+  - Croissant
+  - Enemy
   layers:
   - Default
   - TransparentFX
