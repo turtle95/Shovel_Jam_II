@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class BulletKill : MonoBehaviour {
 
-
-    void OnTriggerEnter(Collider other)
+    public GameObject burst;
+    void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "Enemy")
         {
-            DestroyObject(other.gameObject);
+            Instantiate(burst, other.gameObject.transform.position, other.gameObject.transform.rotation);
+
+            Destroy(other.gameObject);
+
+           
+            //other.gameObject.GetComponent<spiders>().arrowHit(2);
+            Destroy(this.gameObject);
         }
     }
 
