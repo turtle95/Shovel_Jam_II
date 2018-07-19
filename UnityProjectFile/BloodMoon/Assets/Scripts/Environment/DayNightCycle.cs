@@ -22,9 +22,13 @@ public class DayNightCycle : MonoBehaviour {
 
 	public void ChangeToNight () {
 		isNight = true;
+        sun.enabled = false;
+        DynamicGI.UpdateEnvironment();
 	}
 
 	public void ChangeToMorning () {
 		isNight = false;
+        sun.enabled = true;
+        DynamicGI.UpdateEnvironment();
 	}
 }
