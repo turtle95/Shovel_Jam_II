@@ -11,10 +11,10 @@ public class PlayerHealth : MonoBehaviour
     public float startingHealth = 10;                            // The amount of health the player starts the game with.
     public float currentHealth;                                   // The current health the player has.
     public Slider healthSlider;                                 // Reference to the UI's health bar.
-    public Image damageImage;                                   // Reference to an image to flash on the screen on being hurt.
+   // public Image damageImage;                                   // Reference to an image to flash on the screen on being hurt.
     // public AudioClip deathClip;                                 // The audio clip to play when the player dies.
-    public float flashSpeed = 5f;                               // The speed the damageImage will fade at.
-    public Color flashColour = new Color(1f, 0f, 0f, 0.1f);     // The colour the damageImage is set to, to flash.
+   // public float flashSpeed = 5f;                               // The speed the damageImage will fade at.
+   // public Color flashColour = new Color(1f, 0f, 0f, 0.1f);     // The colour the damageImage is set to, to flash.
 
 	// Energy
 	public float startingEnergy = 100;
@@ -35,9 +35,12 @@ public class PlayerHealth : MonoBehaviour
 
 	bool isNight;												// Whether it is nighttime.
     bool isDead;                                                // Whether the player is dead.
-    bool damaged;                                               // True when the player gets damaged.
+    public bool damaged;                                               // True when the player gets damaged.
 
     public int energyLoss = 1;
+    public Animator screenFlash;
+    public GameObject player;
+    public GameObject deathPanel;
 
     private void Start()
     {
@@ -64,44 +67,44 @@ public class PlayerHealth : MonoBehaviour
     void Update ()
     {
         LoseEnergy(energyLoss);
-        // If the player has just been damaged...
-        if(damaged)
-        {
-            // ... set the colour of the damageImage to the flash colour.
-            // damageImage.color = flashColour;
-        }
-        // Otherwise...
-        else
-        {
-            // ... transition the colour back to clear.
-            // damageImage.color = Color.Lerp (damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
-        }
 
-        // Reset the damaged flag.
-        damaged = false;
+        if (isDead && Input.GetButtonDown("Jump"))
+        {
+            deathPanel.SetActive(false);
+            player.SetActive(true);
+            currentHealth = startingHealth;
+            currentEnergy = startingEnergy;
+            sun.ChangeToMorning();
+            isDead = false;
+        }
+        
 		
     }
 
     public void TakeDamage (int amount)
     {
-        // Set the damaged flag so the screen will flash.
-        damaged = true;
-
-        // Reduce the current health by the damage amount.
-        currentHealth -= amount;
-
-        //// Set the health bar's value to the current health.
-        //healthSlider.value = currentHealth;
-
-        // Play the hurt sound effect.
-        audManager.PlayOneShot(hurtSound);
-
-        // If the player has lost all it's health and the death flag hasn't been set yet...
-        if(currentHealth <= 0 && !isDead)
+        if (damaged == false)
         {
-            // ... it should die.
-            audManager.PlayOneShot(deathSound);
-            Death ();
+            damaged = true;
+            
+            // Reduce the current health by the damage amount.
+            currentHealth -= amount;
+
+            //// Set the health bar's value to the current health.
+            healthSlider.value = currentHealth;
+
+            // Play the hurt sound effect.
+            //audManager.PlayOneShot(hurtSound);
+
+           
+            if (currentHealth <= 0 && !isDead)
+            {
+                // ... it should die.
+                //audManager.PlayOneShot(deathSound);
+                Death();
+            }
+
+            StartCoroutine(WaitForFlash());
         }
     }
 
@@ -110,13 +113,13 @@ public class PlayerHealth : MonoBehaviour
 		energySlider.value = currentEnergy;
 		currentEnergy -= amount * Time.deltaTime;
 
-		if (currentEnergy <= 0) {// && sun.isNight)  {
+		if (currentEnergy <= 0 && sun.isNight) {// && sun.isNight)  {
             // TODO have player collapse and spiders surround him.
             sun.ChangeToMorning();
             audManager.PlayOneShot(deathSound);
             Death();
 		}
-		else if (currentEnergy <= 0) {// && !sun.isNight) {
+		else if (currentEnergy <= 0 && !sun.isNight) {// && !sun.isNight) {
             // TODO have player collapse
 
             // TODO wait a few seconds for animation
@@ -133,6 +136,9 @@ public class PlayerHealth : MonoBehaviour
     {
         // Set the death flag so this function won't be called again.
         isDead = true;
+        player.SetActive(false);
+
+        deathPanel.SetActive(true);
 
         // Turn off any remaining shooting effects.
         // playerShooting.DisableEffects ();
@@ -147,6 +153,14 @@ public class PlayerHealth : MonoBehaviour
         // Turn off the movement and shooting scripts.
         // playerMovement.enabled = false;
         // playerShooting.enabled = false;
-    }       
+    } 
+    
+
+    IEnumerator WaitForFlash()
+    {
+        screenFlash.SetTrigger("Damage");
+        yield return new WaitForSeconds(0.6f);
+        damaged = false;
+    }
 }
 
