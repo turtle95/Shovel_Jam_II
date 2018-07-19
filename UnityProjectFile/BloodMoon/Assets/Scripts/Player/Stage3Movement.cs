@@ -62,7 +62,8 @@ public class Stage3Movement : MonoBehaviour {
 		Cursor.lockState = CursorLockMode.Locked;
 	}
 
-	void Update () {
+	void Update ()
+    {
 		//rotates the player based on its relation to the planet, applies gravity
 		WorldGravity();
 
@@ -75,7 +76,8 @@ public class Stage3Movement : MonoBehaviour {
 
 
 
-		if (!(movement.x == 0 && movement.z == 0)) {
+		if (!(movement.x == 0 && movement.z == 0))
+        {
             if (Grounded() == true && footstepManager.isPlaying == false)
             {
                 if (Input.GetButtonDown("Fire3"))
@@ -121,8 +123,10 @@ public class Stage3Movement : MonoBehaviour {
 		if (Input.GetButtonDown ("Fire2")) {
             hScript.currentEnergy -= 10;
             audManager.PlayOneShot(dashSound);
-			rb.AddForce(movement *dashDistance, ForceMode.VelocityChange);
-			//dashParticles.Play ();
+			rb.AddForce(movement *dashDistance, ForceMode.Impulse);
+            dashParticles.Play();
+            StartCoroutine(DashStop());
+			
 		//	dashParticles2.Play ();
 		}
 
@@ -151,24 +155,28 @@ public class Stage3Movement : MonoBehaviour {
 
 
 
-        //if you are looking down at the right angle and you fire and you are not high enough up to be in a fast fall then shoot yourself upwards
-        if (cScript.lookingDown && Input.GetButtonUp ("Fire1") && NotFastFall()) {
-			rb.AddForce (transform.up * maxFlyHeight, ForceMode.VelocityChange);
-		}
-
-	
-
-
-		//moves the player without directly adjusting its velocity, allows unity's gravity to keep working
-		rb.MovePosition (rb.position + movement * walkSpeed * Time.deltaTime);
-
+      
 	}
 
 
+    private void FixedUpdate()
+    {
+        //if you are looking down at the right angle and you fire and you are not high enough up to be in a fast fall then shoot yourself upwards
+        if (cScript.lookingDown && Input.GetButtonUp("Fire1") && NotFastFall())
+        {
+            rb.AddForce(transform.up * maxFlyHeight, ForceMode.VelocityChange);
+        }
 
 
-	//true when you are too close to use fast fall
-	bool NotFastFall(){
+
+
+        //moves the player without directly adjusting its velocity, allows unity's gravity to keep working
+        rb.MovePosition(rb.position + movement * walkSpeed * Time.deltaTime);
+
+    }
+
+    //true when you are too close to use fast fall
+    bool NotFastFall(){
 		return Physics.Raycast (transform.position,-transform.up, distToFall);
 	}
 
@@ -178,7 +186,15 @@ public class Stage3Movement : MonoBehaviour {
 		return Physics.Raycast (transform.position, -transform.up, distToGrounded);
 	}
 
-
+    //Makes dash stop suddenly rather than leaving you with momentum to fight against
+    IEnumerator DashStop()
+    {
+        yield return new WaitForSeconds(0.2f);
+        //Vector3 orientedZero = rb.velocity;
+        //orientedZero = cameraYOnly.TransformDirection(orientedZero);
+        //orientedZero = new Vector3(0, orientedZero.y, 0);
+        rb.velocity = Vector3.zero;
+    }
 
 
 	//void OnTriggerStay(Collider col){
