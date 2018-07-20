@@ -19,16 +19,20 @@ public class Stage3CamLook : MonoBehaviour {
 	public bool lookingDown = false;
 	public variableTracker varTrack;
 
+    
+
 	void Start(){
 		transform.rotation = camDown.rotation;
 		varTrack = GameObject.Find ("variableTracker").GetComponent<variableTracker> ();
+       
 	}
 
 	// Update is called once per frame
-	void FixedUpdate () {
+	void FixedUpdate ()
+    {
 
 		if (varTrack.controller)
-			sensitivity = 7;
+			sensitivity = 4;
 		else
 			sensitivity = 1;
 		
@@ -58,8 +62,12 @@ public class Stage3CamLook : MonoBehaviour {
 			lookingDown = true;
 		} else
 			lookingDown = false;
-
-	
 		
 	}
+
+   
+
+
+  
+    
 }
