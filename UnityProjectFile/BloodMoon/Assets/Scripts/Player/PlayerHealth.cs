@@ -41,6 +41,7 @@ public class PlayerHealth : MonoBehaviour
     public Animator screenFlash;
     public GameObject player;
     public GameObject deathPanel;
+    
 
     private void Start()
     {
@@ -114,16 +115,20 @@ public class PlayerHealth : MonoBehaviour
 		currentEnergy -= amount * Time.deltaTime;
 
 		if (currentEnergy <= 0 && sun.isNight) {// && sun.isNight)  {
-            // TODO have player collapse and spiders surround him.
+                                                // TODO have player collapse and spiders surround him.
+
+            // audManager.PlayOneShot(deathSound);
+            currentEnergy = startingEnergy;
+            energySlider.value = currentEnergy;
+            if (sun.dieOnNight)
+                Death();
             sun.ChangeToMorning();
-            audManager.PlayOneShot(deathSound);
-            Death();
-		}
+        }
 		else if (currentEnergy <= 0 && !sun.isNight) {// && !sun.isNight) {
             // TODO have player collapse
 
             // TODO wait a few seconds for animation
-            audManager.PlayOneShot(nightJingle);
+            //audManager.PlayOneShot(nightJingle);
             currentEnergy = startingEnergy;
             energySlider.value = currentEnergy;
 
@@ -137,7 +142,7 @@ public class PlayerHealth : MonoBehaviour
         // Set the death flag so this function won't be called again.
         isDead = true;
         player.SetActive(false);
-
+        sun.dieOnNight = false;
         deathPanel.SetActive(true);
 
         // Turn off any remaining shooting effects.

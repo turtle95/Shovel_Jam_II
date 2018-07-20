@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 108155139611450288}
   m_Layer: 0
   m_Name: MushyLights2
-  m_TagString: Untagged
+  m_TagString: Glowy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 108674307457521010}
   m_Layer: 0
   m_Name: MushyLights2
-  m_TagString: Untagged
+  m_TagString: Glowy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

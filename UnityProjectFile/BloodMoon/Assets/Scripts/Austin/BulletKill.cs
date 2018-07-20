@@ -5,17 +5,36 @@ using UnityEngine;
 public class BulletKill : MonoBehaviour {
 
     public GameObject burst;
+   // public GameObject burn;
+    public int bulletType = 1;
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "Enemy")
         {
-            Instantiate(burst, other.gameObject.transform.position, other.gameObject.transform.rotation);
+            switch (bulletType)
+            {
+                case 1:
+                    other.gameObject.GetComponent<spiders>().arrowHit(3);
+                    Destroy(this.gameObject);
+                    Instantiate(burst, other.gameObject.transform.position, other.gameObject.transform.rotation);
+                    break;
+                case 2:
+                    Destroy(other.gameObject);
+                    Destroy(this.gameObject);
+                    Instantiate(burst, other.gameObject.transform.position, other.gameObject.transform.rotation);
+                    break;
+                default:
+                    break;
+            }
+            
+        }
+    }
 
-            Destroy(other.gameObject);
-
-           
-            //other.gameObject.GetComponent<spiders>().arrowHit(2);
-            Destroy(this.gameObject);
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            other.gameObject.GetComponent<spiders>().burning = true;
         }
     }
 

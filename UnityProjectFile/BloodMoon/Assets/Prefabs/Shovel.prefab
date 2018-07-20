@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 65475814547612304}
   - component: {fileID: 114780107634063666}
   - component: {fileID: 54171414192527828}
+  - component: {fileID: 114059365675330014}
   m_Layer: 10
   m_Name: Shovel
   m_TagString: Untagged
@@ -142,7 +143,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1079801342762188}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 60.31969, y: -219.14508, z: 193.64186}
+  m_LocalPosition: {x: 60.453735, y: -147.09067, z: -34.93058}
   m_LocalScale: {x: 0.29, y: 0.29, z: 0.29}
   m_Children:
   - {fileID: 4939891626719260}
@@ -291,6 +292,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114059365675330014
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1079801342762188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbf485492fedf904dab99d9b28899bc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  burst: {fileID: 1293092315743404, guid: 9db9a25e2459fac4c93142b526d80c05, type: 2}
+  bulletType: 2
 --- !u!114 &114780107634063666
 MonoBehaviour:
   m_ObjectHideFlags: 1

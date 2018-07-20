@@ -5,7 +5,7 @@ using UnityEngine;
 public class spiders : MonoBehaviour
 {
 
-    public int health = 5;
+    public float health = 5;
     public int moveSpeed = 20;
     public int rotationSpeed = 5;
     public GameObject pickup;
@@ -13,6 +13,9 @@ public class spiders : MonoBehaviour
 
     private Transform target; //transform of the player
     private bool aggro; //is the player in range of the mob?
+
+    public GameObject burnEffect;
+    public bool burning = false;
 
     // Use this for initialization
     void Start()
@@ -32,6 +35,15 @@ public class spiders : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (burning)
+        {
+            sprayHit();
+        }
+        else
+        {
+            burnEffect.SetActive(false);
+        }
+
         if (aggro == true)
         {
             if (runAway == true)
@@ -55,9 +67,31 @@ public class spiders : MonoBehaviour
         }
     }
 
+    private void LateUpdate()
+    {
+        burning = false;
+    }
+
     public void arrowHit(int arrowDamage)
     {
         health -= arrowDamage;
+        //TO-DO: moveSpeed = moveSpeed * 0.4; //reduce speed after being hit
+        if (health <= 0)
+        {
+            Instantiate(pickup, transform.position, transform.rotation);
+            GetComponent<Animation>().Play("death");
+            aggro = false;
+            Destroy(gameObject, 1.5f);
+        }
+        aggro = true; //mob was hit and is now aggroed
+    }
+
+    //take damage when hit with spray
+    public void sprayHit()
+    {
+        burnEffect.SetActive(true);
+        health -= 5f * Time.deltaTime;
+        
         //TO-DO: moveSpeed = moveSpeed * 0.4; //reduce speed after being hit
         if (health <= 0)
         {

@@ -10,6 +10,7 @@ TagManager:
   - Bullet
   - Croissant
   - Enemy
+  - Glowy
   layers:
   - Default
   - TransparentFX

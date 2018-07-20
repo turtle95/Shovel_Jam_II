@@ -25,6 +25,8 @@ public class variableTracker : MonoBehaviour {
     public GameObject juicytext;
     public GameObject shovelText;
 
+    public int currentNight = 0;
+
 	// Use this for initialization
 	void Start () {
         hScript = GameObject.Find("PlayerPrefab").GetComponent<PlayerHealth>();
