@@ -6,7 +6,7 @@ public class DayNightCycle : MonoBehaviour {
 
 	public bool isNight = false;
 	Light sun;
-    GameObject glowies;
+    public GameObject glowies;
 	void Start() {
 		sun = gameObject.GetComponent<Light>();
 	}
