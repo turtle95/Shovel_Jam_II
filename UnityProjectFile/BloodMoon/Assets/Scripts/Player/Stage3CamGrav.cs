@@ -8,7 +8,7 @@ public class Stage3CamGrav : MonoBehaviour {
 	public Transform downLooker;
 	GameObject planet;
 
-
+    public bool outsidePlanet = false;
 
 	Quaternion localRotPlayer; //quaternion to assign the player's rotation
 	//public Transform playerTrans; 
@@ -21,25 +21,33 @@ public class Stage3CamGrav : MonoBehaviour {
 	private Vector3 velocity = Vector3.one;
 	Transform playerCenter;
 	public Vector3 offSet;
-	//public Transform mainCamTrans;
-	//PlanetGravity pScript;
+    Vector3 gravityUp;
+    //public Transform mainCamTrans;
+    //PlanetGravity pScript;
 
-	//public float distToGrounded = 0.5f; //the distance from player's origin to the ground when grounded
+    //public float distToGrounded = 0.5f; //the distance from player's origin to the ground when grounded
 
-	void Start(){
+    void Start(){
 		planet = GameObject.FindGameObjectWithTag ("Planet");
-		//pScript = planet.GetComponent<PlanetGravity> ();
-		Vector3 gravityUp = (planet.transform.position - transform.position ).normalized;
-
-		transform.rotation = Quaternion.FromToRotation (transform.up, gravityUp) * transform.rotation;
+        //pScript = planet.GetComponent<PlanetGravity> ();
+        //Vector3 gravityUp = (planet.transform.position - transform.position ).normalized;
+        
+        if (outsidePlanet)
+            gravityUp = (transform.position - planet.transform.position).normalized;
+        else
+            gravityUp = (planet.transform.position - transform.position).normalized;
+        transform.rotation = Quaternion.FromToRotation (transform.up, gravityUp) * transform.rotation;
 		playerCenter = player.GetComponent<Transform>();
 		//playerRB = player.GetComponent<Rigidbody> ();
 	}
 
 	void Update(){
-			//pScript.Attract (transform, downLooker);
-		//Vector3 gravityUp = (transform.position - planet.transform.position).normalized;
-        Vector3 gravityUp = (planet.transform.position - transform.position).normalized;
+        //pScript.Attract (transform, downLooker);
+        
+        if (outsidePlanet)
+		    gravityUp = (transform.position - planet.transform.position).normalized;
+        else
+           gravityUp = (planet.transform.position - transform.position).normalized;
         Vector3 turdsUp = downLooker.up;
 		Quaternion targetRotation = Quaternion.FromToRotation (turdsUp, gravityUp) * downLooker.rotation;
 		downLooker.rotation = Quaternion.Slerp (downLooker.rotation, targetRotation, 50 * Time.deltaTime);

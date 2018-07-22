@@ -55,6 +55,9 @@ public class Stage3Movement : MonoBehaviour {
     //Ref to playerHealth for energy
     public PlayerHealth hScript;
 
+
+    public bool outsidePlanet = false;
+
 	void Start () {
         
 		rb = GetComponent<Rigidbody> (); //assigns rb to the player's rigidbody
@@ -218,8 +221,11 @@ public class Stage3Movement : MonoBehaviour {
 	public void WorldGravity()
 	{
 		//gets the distance between player and planet, essentially this is the direction you want to be facing
-		//gravityUp = (transform.position - planet.position).normalized;
-        gravityUp = (planet.position - transform.position ).normalized;
+
+        if(outsidePlanet)
+		    gravityUp = (transform.position - planet.position).normalized;
+        else
+            gravityUp = (planet.position - transform.position ).normalized;
         //the up direction for the player
         Vector3 turdsUp = transform.up;
 
