@@ -9,7 +9,7 @@ public class BulletKill : MonoBehaviour {
     public int bulletType = 1;
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.CompareTag("Enemy"))
         {
             switch (bulletType)
             {
@@ -32,7 +32,7 @@ public class BulletKill : MonoBehaviour {
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.CompareTag("Enemy"))
         {
             other.gameObject.GetComponent<spiders>().burning = true;
         }

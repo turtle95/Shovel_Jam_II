@@ -11,6 +11,7 @@ TagManager:
   - Croissant
   - Enemy
   - Glowy
+  - Temple
   layers:
   - Default
   - TransparentFX
