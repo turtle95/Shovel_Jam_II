@@ -26,6 +26,12 @@ public class variableTracker : MonoBehaviour {
     public GameObject shovelText;
 
     public int currentNight = 0;
+    public float dayNightTimer = 60;
+
+
+    public bool eventOne = true;
+    public bool eventTwo = false;
+    public bool eventThree = false;
 
 	// Use this for initialization
 	void Start () {

@@ -46,7 +46,9 @@ public class Stage3Movement : MonoBehaviour {
 
 	public GameObject infectedFog;
 
-
+    //Jump stuffs
+    int multiJump = 0;
+    bool jumping = false;
 
     public float jumpForce = 30f;
 
@@ -69,7 +71,7 @@ public class Stage3Movement : MonoBehaviour {
     {
 		//rotates the player based on its relation to the planet, applies gravity
 		WorldGravity();
-
+        Debug.Log(Grounded());
 		movement = new Vector3 (Input.GetAxis ("Horizontal"), 0, Input.GetAxis("Vertical"));
 
 
@@ -133,11 +135,16 @@ public class Stage3Movement : MonoBehaviour {
 		//	dashParticles2.Play ();
 		}
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && multiJump < 3)
         {
+            
+            multiJump++;
+            Debug.Log(multiJump);
             hScript.currentEnergy -= 5;
             audManager.PlayOneShot(jumpSound);
-            rb.AddForce(transform.up * jumpForce, ForceMode.VelocityChange);
+            jumping = true;
+            
+            
           //  dashParticles.Play();
           //  dashParticles2.Play();
         }
@@ -145,14 +152,14 @@ public class Stage3Movement : MonoBehaviour {
         if (Input.GetButtonDown("Fire3"))
         {
             walkSpeed = runSpeed;
-            hScript.energyLoss = 2;
+            hScript.energyGain = -2;
            // dashParticles.Play();
            // dashParticles2.Play();
         }
 
         if (Input.GetButtonUp("Fire3"))
         {
-            hScript.energyLoss = 1;
+            hScript.energyGain = 1;
             walkSpeed = refWalkSpeed;
         }
 
@@ -171,7 +178,12 @@ public class Stage3Movement : MonoBehaviour {
         }
 
 
-
+        if (jumping)
+        {
+            
+            rb.AddForce(transform.up * jumpForce, ForceMode.VelocityChange);
+            jumping = false;
+        }
 
         //moves the player without directly adjusting its velocity, allows unity's gravity to keep working
         rb.MovePosition(rb.position + movement * walkSpeed * Time.deltaTime);
@@ -229,8 +241,12 @@ public class Stage3Movement : MonoBehaviour {
         //the up direction for the player
         Vector3 turdsUp = transform.up;
 
-		//applies gravity based on the player's local down
-		rb.AddForce(turdsUp * gravity);
+        //applies gravity based on the player's local down
+        if (Grounded())
+            multiJump = 0;
+        else
+            rb.AddForce(turdsUp * gravity);
+        
 
 		//creates a rotation between the gravityUp and the player's current up
 		Quaternion targetRotation = Quaternion.FromToRotation(turdsUp, gravityUp) * transform.rotation;

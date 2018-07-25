@@ -27,17 +27,14 @@ public class PlayerHealth : MonoBehaviour
     public AudioClip nightJingle;
 
     public DayNightCycle sun;
-	
-    // Animator anim;                                              // Reference to the Animator component.
-    // AudioSource playerAudio;                                    // Reference to the AudioSource component.
-    // PlayerMovement playerMovement;                              // Reference to the player's movement.
-    // PlayerShooting playerShooting;                              // Reference to the PlayerShooting script.
+
+    
 
 	bool isNight;												// Whether it is nighttime.
     bool isDead;                                                // Whether the player is dead.
     public bool damaged;                                               // True when the player gets damaged.
 
-    public int energyLoss = 1;
+    public int energyGain = 1;
     public Animator screenFlash;
     public GameObject player;
     public GameObject deathPanel;
@@ -50,24 +47,17 @@ public class PlayerHealth : MonoBehaviour
 
     void Awake ()
     {
-        // Setting up the references.
-        // anim = GetComponent  ();
-        // playerAudio = GetComponent  ();
-        // playerMovement = GetComponent  ();
-        // playerShooting = GetComponentInChildren  ();
+       
 
-        // Set the initial health of the player.
+        // Set the initial health and stamina of the player.
         currentHealth = startingHealth;
 		currentEnergy = startingEnergy;
-
-		//healthSlider.value = currentHealth;
-		//energySlider.value = currentEnergy;
     }
 
 
     void Update ()
     {
-        LoseEnergy(energyLoss);
+        EnergyManage(energyGain);
 
         if (isDead && Input.GetButtonDown("Jump"))
         {
@@ -109,33 +99,24 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-	public void LoseEnergy (int amount) 
+	public void EnergyManage (int amount) 
 	{
 		energySlider.value = currentEnergy;
-		currentEnergy -= amount * Time.deltaTime;
+        if(currentEnergy < varTrack.maxStam)
+		    currentEnergy += amount * Time.deltaTime;
 
-		if (currentEnergy <= 0 && sun.isNight) {// && sun.isNight)  {
+		if (currentEnergy <= 0) {// && sun.isNight)  {
                                                 // TODO have player collapse and spiders surround him.
 
             // audManager.PlayOneShot(deathSound);
             currentEnergy = startingEnergy;
             energySlider.value = currentEnergy;
-            if (sun.dieOnNight)
-                Death();
-            sun.ChangeToMorning();
+            StartCoroutine(WaitForRecover());
         }
-		else if (currentEnergy <= 0 && !sun.isNight) {// && !sun.isNight) {
-            // TODO have player collapse
-
-            // TODO wait a few seconds for animation
-            //audManager.PlayOneShot(nightJingle);
-            currentEnergy = startingEnergy;
-            energySlider.value = currentEnergy;
-
-            sun.ChangeToNight();
-		}
+		
 	}
 
+    
 
     void Death ()
     {
@@ -160,12 +141,23 @@ public class PlayerHealth : MonoBehaviour
         // playerShooting.enabled = false;
     } 
     
+    
 
     IEnumerator WaitForFlash()
     {
         screenFlash.SetTrigger("Damage");
         yield return new WaitForSeconds(0.6f);
         damaged = false;
+    }
+
+    IEnumerator WaitForRecover()
+    {
+        player.SetActive(false);
+        //screenFlash.SetTrigger("Recover");
+        energyGain *= 4;
+        yield return new WaitForSeconds(2);
+        energyGain /= 4;
+        player.SetActive(true);
     }
 }
 
