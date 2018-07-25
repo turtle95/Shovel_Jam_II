@@ -71,7 +71,7 @@ public class Stage3Movement : MonoBehaviour {
     {
 		//rotates the player based on its relation to the planet, applies gravity
 		WorldGravity();
-        Debug.Log(Grounded());
+       
 		movement = new Vector3 (Input.GetAxis ("Horizontal"), 0, Input.GetAxis("Vertical"));
 
 
@@ -139,7 +139,7 @@ public class Stage3Movement : MonoBehaviour {
         {
             
             multiJump++;
-            Debug.Log(multiJump);
+            //Debug.Log(multiJump);
             hScript.currentEnergy -= 5;
             audManager.PlayOneShot(jumpSound);
             jumping = true;

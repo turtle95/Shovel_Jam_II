@@ -20,11 +20,14 @@ public class DayNightCycle : MonoBehaviour {
     EventManager eScript;
     float dayNightTimer = 60f;
     float dayLength = 60f;
-
+    float speed = 6f;
 
     public Image dayNightSlider;
     public GameObject daySymbol;
     public GameObject nightSymbol;
+    public float nightTimer = 0;
+    public Text announcerText;
+    bool triggered = true;
 
 	void Start() {
         dayNightTimer = dayLength;
@@ -34,17 +37,55 @@ public class DayNightCycle : MonoBehaviour {
         glowies = GameObject.FindGameObjectsWithTag("Glowy");
         for (int i = 0; i < glowies.Length; i++)
         {
-            glowies[i].SetActive(false);
+            glowies[i].SetActive(true);
         }
     }
 
     private void Update()
     {
-        dayNightTimer -= Time.deltaTime;
-        sun.intensity = startIntensity * (dayNightTimer / dayLength);
+        if (isNight)
+        {
+            sun.intensity = startIntensity * (nightTimer / dayLength);
+
+            nightTimer += Time.deltaTime * speed;
+            //if (!triggered)
+            //    dayNightTimer -= Time.deltaTime * speed;
+            //else
+            //    dayNightTimer += Time.deltaTime * speed;
+
+            //if (dayNightTimer < 40)
+            //{
+            //    for (int i = 0; i < glowies.Length; i++)
+            //    {
+            //        glowies[i].SetActive(false);
+            //    }
+            //}
+        }
+        
+        else
+        {
+            sun.intensity = startIntensity * (dayNightTimer / dayLength);
+
+            //if (dayNightTimer < 40)
+            //{
+            //    for (int i = 0; i < glowies.Length; i++)
+            //    {
+            //        glowies[i].SetActive(true);
+            //    }
+
+            //}
+        }
+     
+        dayNightTimer -= Time.deltaTime * speed;
+
+
         dayNightSlider.fillAmount = (dayNightTimer / dayLength);
 
-        if(dayNightTimer <= 1)
+        //if (dayNightTimer <= 0)
+         //   triggered = true;
+        
+        DynamicGI.UpdateEnvironment();
+        if (dayNightTimer <= 10f)
         {
             if (isNight)
                 ChangeToMorning();
@@ -53,22 +94,19 @@ public class DayNightCycle : MonoBehaviour {
         }
     }
 
-    private void LateUpdate()
-    {
-        DynamicGI.UpdateEnvironment();
-    }
+    
 
     public void ChangeToNight () {
+        nightTimer = 0;
+        //triggered = false;
         daySymbol.SetActive(false);
         nightSymbol.SetActive(true);
         dayNightTimer = dayLength;
-        // announcer.SetActive(true);
+        announcer.SetActive(true);
+        announcerText.text = "Night";
         isNight = true;
-        sun.enabled = false;
-        for (int i=0; i < glowies.Length; i++)
-        {
-            glowies[i].SetActive(true);
-        }
+        // sun.enabled = false;
+       
 
         //Triggers events based on what is turned on/off
         if (varTrack.eventOne)
@@ -85,18 +123,21 @@ public class DayNightCycle : MonoBehaviour {
 	}
 
 	public void ChangeToMorning () {
+       // triggered = false;
         daySymbol.SetActive(true);
         nightSymbol.SetActive(false);
         dayNightTimer = dayLength;
+        announcer.SetActive(true);
+        announcerText.text = "Morning";
         isNight = false;
-        sun.enabled = true;
-        for (int i = 0; i < glowies.Length; i++)
-        {
-            glowies[i].SetActive(false);
-        }
+        // sun.enabled = true;
+        //for (int i = 0; i < glowies.Length; i++)
+        //{
+        //    glowies[i].SetActive(false);
+        //}
         //DynamicGI.UpdateEnvironment();
 
-        
-        
+
+
     }
 }
