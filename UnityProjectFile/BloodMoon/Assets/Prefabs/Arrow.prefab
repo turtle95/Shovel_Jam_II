@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114143997353943410}
   - component: {fileID: 54678188629314122}
   - component: {fileID: 114399331786669756}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Arrow
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4497559020617428}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: DownLooker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1257547778302444}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c788254a6a4907c468ed8c6a7bf22337, type: 3}
   m_Name: 

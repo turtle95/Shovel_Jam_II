@@ -11,6 +11,20 @@ public class EventManager : MonoBehaviour {
     public GameObject[] TurnOn;
     public GameObject[] TurnOff;
 
+    public int bossCount = 6;
+    public GameObject winScreen;
+    public PlayerHealth hScript;
+
+    private void Update()
+    {
+        if(bossCount <= 0)
+        {
+            //end game!
+            winScreen.SetActive(true);
+            hScript.Win();
+        }
+    }
+
     public void EventOne()
     {
 

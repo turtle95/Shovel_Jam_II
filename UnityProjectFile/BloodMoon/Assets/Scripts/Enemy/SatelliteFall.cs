@@ -10,10 +10,15 @@ public class SatelliteFall : MonoBehaviour {
     public Rigidbody rb;
     public GameObject explosion;
 
-    
-	
-	// When the satellite dies, fall into the temple
-	void Update () {
+    EventManager eScript;
+
+    private void Start()
+    {
+        eScript = GameObject.Find("EventManager").GetComponent<EventManager>();
+    }
+
+    // When the satellite dies, fall into the temple
+    void Update () {
 		if(health <= 0)
         {
             rb.MovePosition(target.position);
@@ -32,7 +37,7 @@ public class SatelliteFall : MonoBehaviour {
 
         if (collision.gameObject.CompareTag("Temple"))
         {
-           
+            eScript.bossCount--;
             Instantiate(explosion, collision.contacts[0].point, collision.transform.rotation);
             Destroy(collision.gameObject);
             Destroy(this.gameObject);

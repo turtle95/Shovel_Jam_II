@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -38,11 +39,12 @@ public class PlayerHealth : MonoBehaviour
     public Animator screenFlash;
     public GameObject player;
     public GameObject deathPanel;
-    
+    Stage3Movement pScript;
 
     private void Start()
     {
         varTrack = GameObject.Find("variableTracker").GetComponent<variableTracker>();
+        pScript = player.GetComponent<Stage3Movement>();
     }
 
     void Awake ()
@@ -61,12 +63,13 @@ public class PlayerHealth : MonoBehaviour
 
         if (isDead && Input.GetButtonDown("Jump"))
         {
-            deathPanel.SetActive(false);
-            player.SetActive(true);
-            currentHealth = startingHealth;
-            currentEnergy = startingEnergy;
-            sun.ChangeToMorning();
-            isDead = false;
+            //deathPanel.SetActive(false);
+            //player.SetActive(true);
+            //currentHealth = startingHealth;
+            //currentEnergy = startingEnergy;
+            //sun.ChangeToMorning();
+            //isDead = false;
+            SceneManager.LoadScene(0);
         }
         
 		
@@ -82,7 +85,7 @@ public class PlayerHealth : MonoBehaviour
             currentHealth -= amount;
 
             //// Set the health bar's value to the current health.
-            healthSlider.fillAmount = currentHealth;
+            healthSlider.fillAmount = currentHealth/startingHealth;
 
             // Play the hurt sound effect.
             //audManager.PlayOneShot(hurtSound);
@@ -101,29 +104,32 @@ public class PlayerHealth : MonoBehaviour
 
 	public void EnergyManage (int amount) 
 	{
-		energySlider.fillAmount = currentEnergy;
+		energySlider.fillAmount = currentEnergy/startingEnergy;
         if(currentEnergy < varTrack.maxStam)
 		    currentEnergy += amount * Time.deltaTime;
 
-		if (currentEnergy <= 0) {// && sun.isNight)  {
-                                                // TODO have player collapse and spiders surround him.
+		if (currentEnergy <= 0) {
 
             // audManager.PlayOneShot(deathSound);
             currentEnergy = startingEnergy;
-            energySlider.fillAmount = currentEnergy;
+            energySlider.fillAmount = currentEnergy/startingEnergy;
             StartCoroutine(WaitForRecover());
         }
 		
 	}
 
-    
+    public void Win()
+    {
+        isDead = true;
+        pScript.recovering = true;
+    }
 
     void Death ()
     {
         // Set the death flag so this function won't be called again.
         isDead = true;
-        player.SetActive(false);
-      
+        //player.SetActive(false);
+        pScript.recovering = true;
         deathPanel.SetActive(true);
 
 
@@ -151,12 +157,12 @@ public class PlayerHealth : MonoBehaviour
 
     IEnumerator WaitForRecover()
     {
-        player.SetActive(false);
-        //screenFlash.SetTrigger("Recover");
+        pScript.recovering = true;
+        screenFlash.SetTrigger("Recover");
         energyGain *= 4;
         yield return new WaitForSeconds(2);
         energyGain /= 4;
-        player.SetActive(true);
+        pScript.recovering = false;
     }
 }
 

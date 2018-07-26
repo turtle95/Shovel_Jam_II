@@ -50,7 +50,7 @@ public class BulletKill : MonoBehaviour {
 
     IEnumerator KillBullet()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(5);
         Destroy(this.gameObject);
     }
 

@@ -61,6 +61,7 @@ public class Stage3Movement : MonoBehaviour {
     public PlayerHealth hScript;
 
     variableTracker varTrack;
+    public bool recovering = false;
     //public bool outsidePlanet = false;
 
 	void Start () {
@@ -126,7 +127,7 @@ public class Stage3Movement : MonoBehaviour {
 
 
         //dashes then calls the dash stop function
-		if (Input.GetButtonDown ("Fire2")) {
+		if (Input.GetButtonDown ("Fire2") && !recovering) {
             hScript.currentEnergy -= 10;
             audManager.PlayOneShot(dashSound);
 			rb.AddForce(movement *dashDistance, ForceMode.Impulse);
@@ -137,7 +138,7 @@ public class Stage3Movement : MonoBehaviour {
 
 
         //tells fixed update to jump if you aren't over your max jump amount
-        if (Input.GetButtonDown("Jump") && multiJump < 3)
+        if (Input.GetButtonDown("Jump") && multiJump < 3 && !recovering)
         {
             
             multiJump++;
@@ -165,7 +166,8 @@ public class Stage3Movement : MonoBehaviour {
             hScript.energyGain = 1;
             walkSpeed = refWalkSpeed;
         }
-      
+        if (recovering)
+            movement = Vector3.zero;
 	}
 
     //Try to apply all the impulse physics stuff here
