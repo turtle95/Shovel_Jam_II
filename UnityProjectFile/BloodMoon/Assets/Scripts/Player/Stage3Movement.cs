@@ -60,12 +60,12 @@ public class Stage3Movement : MonoBehaviour {
     //Ref to playerHealth for energy
     public PlayerHealth hScript;
 
-
-    public bool outsidePlanet = false;
+    variableTracker varTrack;
+    //public bool outsidePlanet = false;
 
 	void Start () {
-        
-		rb = GetComponent<Rigidbody> (); //assigns rb to the player's rigidbody
+        varTrack = GameObject.Find("variableTracker").GetComponent<variableTracker>();
+        rb = GetComponent<Rigidbody> (); //assigns rb to the player's rigidbody
 		refWalkSpeed = walkSpeed;
 		Cursor.lockState = CursorLockMode.Locked;
 	}
@@ -187,7 +187,8 @@ public class Stage3Movement : MonoBehaviour {
 
         if (flying)
         {
-            rb.AddForce(transform.up * jumpForce, ForceMode.VelocityChange);
+            rb.AddForce(transform.up * jumpForce * 5f, ForceMode.VelocityChange);
+            flying = false;
         }
 
         //moves the player without directly adjusting its velocity, allows unity's gravity to keep working
@@ -227,11 +228,11 @@ public class Stage3Movement : MonoBehaviour {
     {
         //gets the distance between player and planet, essentially this is the direction you want to be facing
 
-        if (outsidePlanet)
+        if (varTrack.outsidePlanet)
         {
             gravityUp = (transform.position - planet.position).normalized;
-            walkSpeed += Time.deltaTime * 50;
-            runSpeed += Time.deltaTime;
+            //walkSpeed += Time.deltaTime * 2;
+            //runSpeed += Time.deltaTime * 2;
         }
         else
             gravityUp = (planet.position - transform.position).normalized;

@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 65914267256526696}
   - component: {fileID: 114143997353943410}
   - component: {fileID: 54678188629314122}
+  - component: {fileID: 114399331786669756}
   m_Layer: 10
   m_Name: Arrow
   m_TagString: Enemy
@@ -66,7 +67,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1257547778302444}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5701847, y: 64.41, z: 39.25}
+  m_LocalPosition: {x: -37.777954, y: -142.68552, z: 35.564396}
   m_LocalScale: {x: 0.2937064, y: 0.2937064, z: 1.7528839}
   m_Children:
   - {fileID: 4497559020617428}
@@ -88,7 +89,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 115a7a37b434a6b4ca7d0f841c4320a7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -155,3 +156,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   downLooker: {fileID: 4497559020617428}
   gravity: -10
+--- !u!114 &114399331786669756
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1257547778302444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 585d9626f1a21d34e81ecb3aa0d3878f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

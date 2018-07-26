@@ -9,7 +9,15 @@ public class ExitPlanet : MonoBehaviour {
     public GameObject[] turnOff;
 
     public Stage3Movement pScript;
-    public Stage3CamGrav cScript;
+    //public Stage3CamGrav cScript;
+    variableTracker varTrack;
+
+    public GameObject seal;
+
+    private void Start()
+    {
+        varTrack = GameObject.Find("variableTracker").GetComponent<variableTracker>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -26,15 +34,15 @@ public class ExitPlanet : MonoBehaviour {
             }
 
             //reverses the gravity
-            pScript.outsidePlanet = true;
-            cScript.outsidePlanet = true;
+            varTrack.outsidePlanet = true;
+            //cScript.outsidePlanet = true;
 
-            pScript.walkSpeed *= 4;
-            pScript.runSpeed *= 4;
+            //pScript.walkSpeed *= 4;
+           // pScript.runSpeed *= 4;
            // pScript.jumpForce *= 2;
-            pScript.gravity = -20;
+            
 
-            //StartCoroutine(BurstTimer());
+            StartCoroutine(BurstTimer());
 
             
         }
@@ -44,8 +52,9 @@ public class ExitPlanet : MonoBehaviour {
     {
         pScript.flying = true;
         yield return new WaitForSeconds(0.2f);
-       
-        pScript.flying = false;
+        pScript.gravity -= 10;
+        seal.SetActive(true);
+        //pScript.flying = false;
         Destroy(this.gameObject);
     }
 }

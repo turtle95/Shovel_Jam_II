@@ -33,6 +33,8 @@ public class variableTracker : MonoBehaviour {
     public bool eventTwo = false;
     public bool eventThree = false;
 
+    public bool outsidePlanet = false;
+
 	// Use this for initialization
 	void Start () {
         hScript = GameObject.Find("PlayerPrefab").GetComponent<PlayerHealth>();

@@ -8,8 +8,8 @@ public class TempleBosses : MonoBehaviour {
     public Transform Aimer;
     public Transform playerTrans;
     bool inSights = false;
-
-	
+    Rigidbody rb;
+    public float launchSpeed = 100;
 	
 	// Update is called once per frame
 	void Update () {
@@ -25,23 +25,31 @@ public class TempleBosses : MonoBehaviour {
         if (other.CompareTag("Player"))
         {
             playerTrans = other.gameObject.transform;
-            StartCoroutine(FireRate());
+            //if(!inSights)
+            //    StartCoroutine(FireRate());
             inSights = true;
         }
 
     }
 
+   
+
     private void OnTriggerExit(Collider other)
     {
-        inSights = false;
+        if (other.CompareTag("Player"))
+        {
+            inSights = false;
+        }
     }
 
-    IEnumerator FireRate()
-    {
-        yield return new WaitForSeconds(0.5f);
-        Instantiate(arrow, Aimer.position, Aimer.rotation);
-        if (inSights)
-            StartCoroutine(FireRate());
-    }
+    //IEnumerator FireRate()
+    //{
+    //    rb = Instantiate(arrow, Aimer.position, Aimer.rotation).GetComponent<Rigidbody>();
+    //    rb.velocity = Aimer.forward * launchSpeed;
+    //    yield return new WaitForSeconds(1.5f);
+        
+    //    if (inSights)
+    //        StartCoroutine(FireRate());
+    //}
 
 }

@@ -8,7 +8,7 @@ public class Stage3CamGrav : MonoBehaviour {
 	public Transform downLooker;
 	GameObject planet;
 
-    public bool outsidePlanet = false;
+   // public bool outsidePlanet = false;
 
 	Quaternion localRotPlayer; //quaternion to assign the player's rotation
 	
@@ -22,15 +22,15 @@ public class Stage3CamGrav : MonoBehaviour {
 	Transform playerCenter;
 	public Vector3 offSet;
     Vector3 gravityUp;
-   
 
+    variableTracker varTrack;
     
 
     void Start(){
 		planet = GameObject.FindGameObjectWithTag ("Planet");
-       
-        
-        if (outsidePlanet)
+        varTrack = GameObject.Find("variableTracker").GetComponent<variableTracker>();
+
+        if (varTrack.outsidePlanet)
             gravityUp = (transform.position - planet.transform.position).normalized;
         else
             gravityUp = (planet.transform.position - transform.position).normalized;
@@ -42,7 +42,7 @@ public class Stage3CamGrav : MonoBehaviour {
 	void Update(){
         
         
-        if (outsidePlanet)
+        if (varTrack.outsidePlanet)
 		    gravityUp = (transform.position - planet.transform.position).normalized;
         else
            gravityUp = (planet.transform.position - transform.position).normalized;

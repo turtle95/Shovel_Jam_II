@@ -10,6 +10,10 @@ public class BulletKill : MonoBehaviour {
     //checks if this is a shovel or a croissant
     public int bulletType = 1;
 
+    private void Start()
+    {
+        StartCoroutine(KillBullet());
+    }
 
     void OnCollisionEnter(Collision other)
     {
@@ -41,6 +45,13 @@ public class BulletKill : MonoBehaviour {
         {
             other.gameObject.GetComponent<spiders>().burning = true;
         }
+    }
+
+
+    IEnumerator KillBullet()
+    {
+        yield return new WaitForSeconds(2);
+        Destroy(this.gameObject);
     }
 
 }
