@@ -69,9 +69,10 @@ public class Stage3Movement : MonoBehaviour {
 
 	void Update ()
     {
+        
 		//rotates the player based on its relation to the planet, applies gravity
 		WorldGravity();
-        Debug.Log(Grounded());
+       
 		movement = new Vector3 (Input.GetAxis ("Horizontal"), 0, Input.GetAxis("Vertical"));
 
 
@@ -139,7 +140,7 @@ public class Stage3Movement : MonoBehaviour {
         {
             
             multiJump++;
-            Debug.Log(multiJump);
+            //Debug.Log(multiJump);
             hScript.currentEnergy -= 5;
             audManager.PlayOneShot(jumpSound);
             jumping = true;
@@ -212,38 +213,40 @@ public class Stage3Movement : MonoBehaviour {
     }
 
 
-	//void OnTriggerStay(Collider col){
-	//	if (col.CompareTag ("Fog")) {
-	//		infectedFog.SetActive (true);
-	//		walkSpeed = 3;
-	//		enemCol = col;
-	//		triggered = true;
-	//	}
-	//}
+    //void OnTriggerStay(Collider col){
+    //	if (col.CompareTag ("Fog")) {
+    //		infectedFog.SetActive (true);
+    //		walkSpeed = 3;
+    //		enemCol = col;
+    //		triggered = true;
+    //	}
+    //}
 
-	//void OnTriggerExit(Collider col){
-	//	if (col.CompareTag ("Fog")) {
-	//		infectedFog.SetActive (false);
-	//		walkSpeed = refWalkSpeed;
-	//		triggered = false;
-	//	}
-	//}
+    //void OnTriggerExit(Collider col){
+    //	if (col.CompareTag ("Fog")) {
+    //		infectedFog.SetActive (false);
+    //		walkSpeed = refWalkSpeed;
+    //		triggered = false;
+    //	}
+    //}
 
 
-	public void WorldGravity()
-	{
-		//gets the distance between player and planet, essentially this is the direction you want to be facing
+    public void WorldGravity()
+    {
+        //gets the distance between player and planet, essentially this is the direction you want to be facing
 
-        if(outsidePlanet)
-		    gravityUp = (transform.position - planet.position).normalized;
+        if (outsidePlanet)
+            gravityUp = (transform.position - planet.position).normalized;
         else
-            gravityUp = (planet.position - transform.position ).normalized;
+            gravityUp = (planet.position - transform.position).normalized;
         //the up direction for the player
         Vector3 turdsUp = transform.up;
 
         //applies gravity based on the player's local down
-        if (Grounded())
-            multiJump = 0;
+        if (Grounded()) { 
+       
+        multiJump = 0;
+        }
         else
             rb.AddForce(turdsUp * gravity);
         
