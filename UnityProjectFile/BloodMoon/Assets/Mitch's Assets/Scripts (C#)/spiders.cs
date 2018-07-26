@@ -29,7 +29,7 @@ public class spiders : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        if (target == null) target = GameObject.FindWithTag("Player").transform;
+        target = GameObject.FindWithTag("Player").transform;
         if (target == null)
         {
             Debug.LogWarning("Couldn't find the 'Player' tag. Deleting Spider.");
@@ -86,8 +86,8 @@ public class spiders : MonoBehaviour
             RaycastHit _hit;
             if (Physics.Raycast(transform.position + (transform.up * 1 + transform.forward * 1), -transform.up, out _hit))
             {
-                Vector3 _proj = transform.forward - (Vector3.Dot(transform.forward, _hit.normal)) * _hit.normal;
-                transform.rotation = Quaternion.LookRotation(_proj, _hit.normal);
+                //Vector3 _proj = transform.forward - (Vector3.Dot(transform.forward, _hit.normal)) * _hit.normal;
+                //transform.rotation = Quaternion.LookRotation(_proj, _hit.normal);
             }
         }
     }
