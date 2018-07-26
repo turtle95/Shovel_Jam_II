@@ -93,7 +93,7 @@ public class SpiderSpawner : MonoBehaviour
         while (spiderCountCurrent < numberToTrickle)
         {
             // cast a random ray to see if we hit land
-            Vector3 randomPoint = Random.onUnitSphere * 10; //this is an imaginary sphere that will choose a random point to cast a ray from.
+            Vector3 randomPoint = Random.onUnitSphere * 100; //this is an imaginary sphere that will choose a random point to cast a ray from.
             Vector3 pointAwayFromPlanet = -300f * Vector3.Normalize(planet.position - randomPoint) + randomPoint; //find a point along the vector of planet.position and randomPoint but 300 units out.
             RaycastHit hit;
             if (Physics.Linecast(randomPoint, pointAwayFromPlanet, out hit))
