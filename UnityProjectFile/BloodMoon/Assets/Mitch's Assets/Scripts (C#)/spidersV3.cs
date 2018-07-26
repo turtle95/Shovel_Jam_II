@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class spidersV3 : MonoBehaviour
 {
-    public LayerMask terrainMask;
+    //public LayerMask terrainMask;
     public int health = 5;
     public int moveSpeed = 20;
     public int rotationSpeed = 5;
@@ -126,7 +126,7 @@ public class spidersV3 : MonoBehaviour
     private void LateUpdate() //late updated does not interfere with the movement calculations happening in update
     {
         RaycastHit _hit;
-        if (Physics.Raycast(transform.position + (transform.up * 1 + transform.forward * 1), -transform.up, out _hit, terrainMask))
+        if (Physics.Raycast(transform.position + (transform.up * 1 + transform.forward * 1), -transform.up, out _hit))
         {
             Vector3 _proj = transform.forward - (Vector3.Dot(transform.forward, _hit.normal)) * _hit.normal;
             transform.rotation = Quaternion.LookRotation(_proj, _hit.normal);
