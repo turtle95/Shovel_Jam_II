@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class EventManager : MonoBehaviour {
 
-    //public Text announcer;
+   //Not everything is being used in this script yet, waiting until we develop out the events a little more
 
 
     public GameObject[] TurnOn;

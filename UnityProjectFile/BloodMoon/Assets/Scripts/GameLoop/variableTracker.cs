@@ -57,21 +57,23 @@ public class variableTracker : MonoBehaviour {
             TestForController();
     }
 
-
+    //adds to your health stats
     public void AddHealth()
     {
         healthText.SetActive(true);
         hScript.currentHealth += 2;
-        hScript.healthSlider.maxValue += 1;
+        //hScript.healthSlider.maxValue += 1;
     }
 
+    //adds to your stamina stats
     public void AddStamina()
     {
         staminaText.SetActive(true);
         hScript.currentEnergy += 10;
-        hScript.energySlider.maxValue += 5;
+       // hScript.energySlider.maxValue += 5;
     }
 
+    //adds to your speed stats
     public void AddSpeed()
     {
         speedText.SetActive(true);
@@ -81,6 +83,7 @@ public class variableTracker : MonoBehaviour {
         mScript.dashDistance += 1;
     }
 
+    //Displays text based on which weapon you picked up
    public void GrabWeapon(int chosen)
     {
         switch (chosen)

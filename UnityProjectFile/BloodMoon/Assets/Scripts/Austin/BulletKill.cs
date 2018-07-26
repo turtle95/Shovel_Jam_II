@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class BulletKill : MonoBehaviour {
 
+    //blood burst for the spiders
     public GameObject burst;
-   // public GameObject burn;
+
+    //checks if this is a shovel or a croissant
     public int bulletType = 1;
+
+
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Enemy"))
@@ -30,6 +34,7 @@ public class BulletKill : MonoBehaviour {
         }
     }
 
+    //For the croissant flame thrower, I'm thinking we should drop this one
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy"))

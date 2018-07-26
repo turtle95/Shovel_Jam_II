@@ -25,10 +25,27 @@ public class ExitPlanet : MonoBehaviour {
                 turnOff[i].SetActive(false);
             }
 
+            //reverses the gravity
             pScript.outsidePlanet = true;
             cScript.outsidePlanet = true;
 
-            Destroy(this.gameObject);
+            pScript.walkSpeed *= 4;
+            pScript.runSpeed *= 4;
+           // pScript.jumpForce *= 2;
+            pScript.gravity = -20;
+
+            //StartCoroutine(BurstTimer());
+
+            
         }
+    }
+
+    public IEnumerator BurstTimer()
+    {
+        pScript.flying = true;
+        yield return new WaitForSeconds(0.2f);
+       
+        pScript.flying = false;
+        Destroy(this.gameObject);
     }
 }

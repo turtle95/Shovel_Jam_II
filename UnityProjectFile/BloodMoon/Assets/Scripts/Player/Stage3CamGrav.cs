@@ -11,10 +11,10 @@ public class Stage3CamGrav : MonoBehaviour {
     public bool outsidePlanet = false;
 
 	Quaternion localRotPlayer; //quaternion to assign the player's rotation
-	//public Transform playerTrans; 
+	
 	public int invert = 1; //value to toggle inverse/normal camera movement
 	public GameObject player;
-//	Rigidbody playerRB;
+
 	public float smoothSpeed = 0.125f;
 
 	public Transform cam;
@@ -22,15 +22,13 @@ public class Stage3CamGrav : MonoBehaviour {
 	Transform playerCenter;
 	public Vector3 offSet;
     Vector3 gravityUp;
-    //public Transform mainCamTrans;
-    //PlanetGravity pScript;
+   
 
-    //public float distToGrounded = 0.5f; //the distance from player's origin to the ground when grounded
+    
 
     void Start(){
 		planet = GameObject.FindGameObjectWithTag ("Planet");
-        //pScript = planet.GetComponent<PlanetGravity> ();
-        //Vector3 gravityUp = (planet.transform.position - transform.position ).normalized;
+       
         
         if (outsidePlanet)
             gravityUp = (transform.position - planet.transform.position).normalized;
@@ -38,16 +36,18 @@ public class Stage3CamGrav : MonoBehaviour {
             gravityUp = (planet.transform.position - transform.position).normalized;
         transform.rotation = Quaternion.FromToRotation (transform.up, gravityUp) * transform.rotation;
 		playerCenter = player.GetComponent<Transform>();
-		//playerRB = player.GetComponent<Rigidbody> ();
+		
 	}
 
 	void Update(){
-        //pScript.Attract (transform, downLooker);
+        
         
         if (outsidePlanet)
 		    gravityUp = (transform.position - planet.transform.position).normalized;
         else
            gravityUp = (planet.transform.position - transform.position).normalized;
+
+
         Vector3 turdsUp = downLooker.up;
 		Quaternion targetRotation = Quaternion.FromToRotation (turdsUp, gravityUp) * downLooker.rotation;
 		downLooker.rotation = Quaternion.Slerp (downLooker.rotation, targetRotation, 50 * Time.deltaTime);
@@ -61,22 +61,6 @@ public class Stage3CamGrav : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 		FollowPlayer ();
-		//Takes input from the mouse and gives it a speed
-	/*	mouseX += Input.GetAxis ("Mouse X") * sensitivity * 0.02f;
-		mouseY -= Input.GetAxis ("Mouse Y") * sensitivity * 0.02f;
-
-		//gives the y camera movement a maximum/minimum movement range
-		mouseY = Mathf.Clamp (mouseY, -rangeY, rangeY);
-
-
-		mainCamTrans.rotation = Quaternion.Euler (mouseY,mouseX,playerTrans.rotation.z);
-
-		// allows toggling between inverted/normal camera controls 
-		if (Input.GetButtonDown ("Invert")) {
-			invert = -1*invert;
-		}*/
-
-
 	}
 
 
@@ -88,8 +72,6 @@ public class Stage3CamGrav : MonoBehaviour {
 		Vector3 smoothedPos = Vector3.SmoothDamp (transform.position, desiredPos, ref velocity, smoothSpeed);
 
 		transform.position = smoothedPos;
-
-		//cam.position = playerTrans.position + offSet;
 
 	}
 

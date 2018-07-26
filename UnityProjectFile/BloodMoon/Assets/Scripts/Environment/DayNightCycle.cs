@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class DayNightCycle : MonoBehaviour {
 
-	//public bool isNight = false;
+	
 	public Light sun;
     public float startIntensity = 4f;
     GameObject[] glowies;
@@ -18,11 +18,12 @@ public class DayNightCycle : MonoBehaviour {
     float dayLength = 60f;
     float speed = 6f;
 
-    public Image dayNightSlider;
-   
+    public Image daySlider;
+    public Image nightSlider;
+
     public float nightTimer = 0;
     public Text announcerText;
-  //  bool triggered = true;
+ 
 
     public RotateLava lavaScript;
 
@@ -35,7 +36,7 @@ public class DayNightCycle : MonoBehaviour {
 
 	void Start() {
         dayNightTimer = dayLength;
-		//sun = gameObject.GetComponent<Light>();
+		
         eScript = GameObject.Find("EventManager").GetComponent<EventManager>();
         varTrack = GameObject.Find("variableTracker").GetComponent<variableTracker>();
         glowies = GameObject.FindGameObjectsWithTag("Glowy");
@@ -52,42 +53,22 @@ public class DayNightCycle : MonoBehaviour {
             sun.intensity = startIntensity * (nightTimer / dayLength);
 
             nightTimer += Time.deltaTime * speed;
-            //if (!triggered)
-            //    dayNightTimer -= Time.deltaTime * speed;
-            //else
-            //    dayNightTimer += Time.deltaTime * speed;
-
-            //if (dayNightTimer < 40)
-            //{
-            //    for (int i = 0; i < glowies.Length; i++)
-            //    {
-            //        glowies[i].SetActive(false);
-            //    }
-            //}
+            nightSlider.fillAmount = (dayNightTimer / dayLength);
         }
         
         else
         {
             sun.intensity = startIntensity * (dayNightTimer / dayLength);
-
-            //if (dayNightTimer < 40)
-            //{
-            //    for (int i = 0; i < glowies.Length; i++)
-            //    {
-            //        glowies[i].SetActive(true);
-            //    }
-
-            //}
+            daySlider.fillAmount = (dayNightTimer / dayLength);
         }
      
         dayNightTimer -= Time.deltaTime * speed;
 
 
-        dayNightSlider.fillAmount = (dayNightTimer / dayLength);
-
-        //if (dayNightTimer <= 0)
-         //   triggered = true;
         
+       
+
+
         DynamicGI.UpdateEnvironment();
         if (dayNightTimer <= 10f)
         {
@@ -113,10 +94,9 @@ public class DayNightCycle : MonoBehaviour {
 
         nightTimer = 0;
         dayNightTimer = dayLength;
-        //announcer.SetActive(true);
+       
         announcerText.text = "Night";
         varTrack.isNight = true;
-        // sun.enabled = false;
        
 
         //Triggers events based on what is turned on/off
@@ -124,16 +104,12 @@ public class DayNightCycle : MonoBehaviour {
             eScript.EventOne();
         if (varTrack.eventTwo)
         {
-            //eScript.EventTwo();
+            
             lavaScript.enabled = true;
             lavaScript.speed = 8f;
         }
         if (varTrack.eventThree)
             eScript.EventThree();
-
-       // DynamicGI.UpdateEnvironment();
-  
-        
         
 	}
 
@@ -151,17 +127,8 @@ public class DayNightCycle : MonoBehaviour {
         if (varTrack.eventTwo)
             lavaScript.speed = 3f;
         dayNightTimer = dayLength;
-       // announcer.SetActive(true);
         announcerText.text = "Morning";
         varTrack.isNight = false;
-        // sun.enabled = true;
-        //for (int i = 0; i < glowies.Length; i++)
-        //{
-        //    glowies[i].SetActive(false);
-        //}
-        //DynamicGI.UpdateEnvironment();
-
-
 
     }
 }

@@ -10,14 +10,16 @@ public class SatelliteFall : MonoBehaviour {
     public Rigidbody rb;
     public GameObject explosion;
 
+    
 	
-	// Update is called once per frame
+	// When the satellite dies, fall into the temple
 	void Update () {
 		if(health <= 0)
         {
             rb.MovePosition(target.position);
         }
 	}
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -36,4 +38,7 @@ public class SatelliteFall : MonoBehaviour {
             Destroy(this.gameObject);
         }
     }
+
+
+   
 }

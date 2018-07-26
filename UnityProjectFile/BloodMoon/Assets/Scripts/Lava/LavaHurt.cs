@@ -19,20 +19,21 @@ public class LavaHurt : MonoBehaviour
     Color originalFogColor;
     float originalFogThick;
 
+    //grabs the normal fog settings so it can reset it later
     private void Start()
     {
         originalFogColor = RenderSettings.fogColor;
         originalFogThick = RenderSettings.fogDensity;
     }
 
-    // Update is called once per frame
+   
     void Update()
     {
+        //hurts ya if you are in the water
         if (hurtScreenActive)
         {
             if (Time.time - hurtTimeStart > hurtTimeInterval)
             {
-                //Debug.Log("calling TakeDamage vz");
                 playerHealth.TakeDamage(hurtAmount);
                 hurtTimeStart = Time.time;
             }
@@ -41,11 +42,10 @@ public class LavaHurt : MonoBehaviour
 
     void OnTriggerEnter(Collider c)
     {
-        //Debug.Log("trigger enter vz c:"+c.gameObject.name+" playerCollider:"+playerCollider.gameObject.name);
+        //turns down gravity, starts hurting you, adds underwater fog
         if (c == playerCollider)
         {
             mScript.gravity = -5;
-            //Debug.Log("collider match vz");
             hurtScreenActive = true;
             hurtTimeStart = Time.time;
             RenderSettings.fogColor = fogColor;
@@ -55,7 +55,7 @@ public class LavaHurt : MonoBehaviour
 
        
     }
-
+    //turns gravity back up, resets the fog, stops hurting you
     void OnTriggerExit(Collider c)
     {
         if (c == playerCollider)

@@ -70,7 +70,7 @@ public class CameraController : MonoBehaviour {
 	}
 
 
-
+    //Follows the player while smoothing the distance so there is a bit of lag when you go fast, makes it look cooler
 	void FollowPlayer(){
 
 		Vector3 desiredPos = playerTrans.position;

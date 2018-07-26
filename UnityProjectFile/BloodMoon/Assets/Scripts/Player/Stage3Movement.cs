@@ -10,16 +10,16 @@ public class Stage3Movement : MonoBehaviour {
 	public float refWalkSpeed;
 	public float gravity = -10;
 	public float turnSpeed = 0.1f;
-	//public CameraController camScript;
+    public float runSpeed = 25f;
 
-	Vector3 movement;
+    //var for user movement input
+    Vector3 movement;
+
+
 	private Rigidbody rb;
 
+    //var to calculate which direction is up
 	Vector3 gravityUp;
-	Collider enemCol;
-	bool triggered = false;
-
-	//float ySensitivity = 0.9f;
 
 	public Transform camDown;
 
@@ -36,23 +36,26 @@ public class Stage3Movement : MonoBehaviour {
 	public Transform cameraBox;
 
 	public Stage3CamLook cScript;
+
+    //The amount you fly upwards when launching yourself
 	public float maxFlyHeight = 2.5f;
 
+
+    //Soundses
     public AudioSource audManager;
     public AudioSource footstepManager;
     public AudioClip dashSound;
     public AudioClip walkingSound;
     public AudioClip jumpSound;
 
-	public GameObject infectedFog;
 
     //Jump stuffs
     int multiJump = 0;
     bool jumping = false;
-
     public float jumpForce = 30f;
 
-    public float runSpeed = 25f;
+    //bool for when you burst out of the planet
+    public bool flying = false;
 
     //Ref to playerHealth for energy
     public PlayerHealth hScript;
@@ -116,31 +119,28 @@ public class Stage3Movement : MonoBehaviour {
 
 
 		//sets movement relative to camera
-		//movement = Camera.main.transform.TransformDirection(movement);
 		movement = cameraYOnly.TransformDirection (movement);
 
-		if (triggered && !enemCol) {
-			walkSpeed = refWalkSpeed;
-			infectedFog.SetActive (false);
-			triggered = false;
-		}
 
 
+
+
+        //dashes then calls the dash stop function
 		if (Input.GetButtonDown ("Fire2")) {
             hScript.currentEnergy -= 10;
             audManager.PlayOneShot(dashSound);
 			rb.AddForce(movement *dashDistance, ForceMode.Impulse);
             dashParticles.Play();
             StartCoroutine(DashStop());
-			
-		//	dashParticles2.Play ();
 		}
 
+
+
+        //tells fixed update to jump if you aren't over your max jump amount
         if (Input.GetButtonDown("Jump") && multiJump < 3)
         {
             
             multiJump++;
-            //Debug.Log(multiJump);
             hScript.currentEnergy -= 5;
             audManager.PlayOneShot(jumpSound);
             jumping = true;
@@ -149,6 +149,8 @@ public class Stage3Movement : MonoBehaviour {
           //  dashParticles.Play();
           //  dashParticles2.Play();
         }
+
+
 
         if (Input.GetButtonDown("Fire3"))
         {
@@ -163,13 +165,10 @@ public class Stage3Movement : MonoBehaviour {
             hScript.energyGain = 1;
             walkSpeed = refWalkSpeed;
         }
-
-
-
       
 	}
 
-
+    //Try to apply all the impulse physics stuff here
     private void FixedUpdate()
     {
         //if you are looking down at the right angle and you fire and you are not high enough up to be in a fast fall then shoot yourself upwards
@@ -186,12 +185,21 @@ public class Stage3Movement : MonoBehaviour {
             jumping = false;
         }
 
+        if (flying)
+        {
+            rb.AddForce(transform.up * jumpForce, ForceMode.VelocityChange);
+        }
+
         //moves the player without directly adjusting its velocity, allows unity's gravity to keep working
         rb.MovePosition(rb.position + movement * walkSpeed * Time.deltaTime);
 
     }
 
-    //true when you are too close to use fast fall
+
+    
+
+
+    //true when you are too close to use fast fall... no fast fall is implemented right now, really just used to make shooting yourself upwards funner
     bool NotFastFall(){
 		return Physics.Raycast (transform.position,-transform.up, distToFall);
 	}
@@ -202,33 +210,17 @@ public class Stage3Movement : MonoBehaviour {
 		return Physics.Raycast (transform.position, -transform.up, distToGrounded);
 	}
 
+
+
+
     //Makes dash stop suddenly rather than leaving you with momentum to fight against
     IEnumerator DashStop()
     {
         yield return new WaitForSeconds(0.2f);
-        //Vector3 orientedZero = rb.velocity;
-        //orientedZero = cameraYOnly.TransformDirection(orientedZero);
-        //orientedZero = new Vector3(0, orientedZero.y, 0);
         rb.velocity = Vector3.zero;
     }
 
 
-    //void OnTriggerStay(Collider col){
-    //	if (col.CompareTag ("Fog")) {
-    //		infectedFog.SetActive (true);
-    //		walkSpeed = 3;
-    //		enemCol = col;
-    //		triggered = true;
-    //	}
-    //}
-
-    //void OnTriggerExit(Collider col){
-    //	if (col.CompareTag ("Fog")) {
-    //		infectedFog.SetActive (false);
-    //		walkSpeed = refWalkSpeed;
-    //		triggered = false;
-    //	}
-    //}
 
 
     public void WorldGravity()
@@ -236,17 +228,21 @@ public class Stage3Movement : MonoBehaviour {
         //gets the distance between player and planet, essentially this is the direction you want to be facing
 
         if (outsidePlanet)
+        {
             gravityUp = (transform.position - planet.position).normalized;
+            walkSpeed += Time.deltaTime * 50;
+            runSpeed += Time.deltaTime;
+        }
         else
             gravityUp = (planet.position - transform.position).normalized;
+       
         //the up direction for the player
         Vector3 turdsUp = transform.up;
 
         //applies gravity based on the player's local down
-        if (Grounded()) { 
-       
-        multiJump = 0;
-        }
+        //if you're grounded then don't apply gravity and reset your jump count
+        if (Grounded())  
+            multiJump = 0;
         else
             rb.AddForce(turdsUp * gravity);
         
