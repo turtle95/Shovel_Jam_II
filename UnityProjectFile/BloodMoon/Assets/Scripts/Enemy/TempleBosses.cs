@@ -9,7 +9,7 @@ public class TempleBosses : MonoBehaviour {
     public Transform playerTrans;
     bool inSights = false;
     Rigidbody rb;
-    public float launchSpeed = 50;
+    public float launchSpeed = 20;
 	
 	// Update is called once per frame
 	void Update () {
@@ -46,7 +46,7 @@ public class TempleBosses : MonoBehaviour {
     {
         rb = Instantiate(arrow, Aimer.position, Aimer.rotation).GetComponent<Rigidbody>();
         rb.velocity = Aimer.forward * launchSpeed;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
 
         if (inSights)
             StartCoroutine(FireRate());

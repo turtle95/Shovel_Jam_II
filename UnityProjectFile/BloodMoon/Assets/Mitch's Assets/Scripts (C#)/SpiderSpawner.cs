@@ -13,7 +13,7 @@ public class SpiderSpawner : MonoBehaviour
     public bool stopTrickle = false;
     public int numberToTrickle = 20;
     public int numberToMassSpawn = 80;
-    private int spiderCountCurrent;
+    public int spiderCountCurrent =0;
     private List<GameObject> spiderTrickleList = new List<GameObject>();
     private List<GameObject> spiderMassList = new List<GameObject>();
     private bool clearingList = false;
@@ -44,7 +44,7 @@ public class SpiderSpawner : MonoBehaviour
 
         if (spiderTrickleList.Count < numberToTrickle - 4)
         {
-            TrickleSpawn();
+            StartCoroutine(TrickleSpawn());
         }
     }
 
@@ -90,7 +90,7 @@ public class SpiderSpawner : MonoBehaviour
     private IEnumerator MassSpawning()
     {
         massSpawning = true;
-        while (spiderCountCurrent < numberToTrickle)
+        while (spiderCountCurrent < numberToMassSpawn)
         {
             // cast a random ray to see if we hit land
             Vector3 randomPoint = Random.onUnitSphere * 100; //this is an imaginary sphere that will choose a random point to cast a ray from.
@@ -150,6 +150,7 @@ public class SpiderSpawner : MonoBehaviour
         for (int i = spiderTrickleList.Count - 1; i >= 0; i--)
         {
             Destroy(spiderTrickleList[i]);
+            spiderCountCurrent--;
             spiderTrickleList.Remove(spiderTrickleList[i]);
             yield return null;
         }
@@ -158,6 +159,7 @@ public class SpiderSpawner : MonoBehaviour
         for (int i = spiderMassList.Count - 1; i >= 0; i--)
         {
             Destroy(spiderMassList[i]);
+            spiderCountCurrent--;
             spiderTrickleList.Remove(spiderMassList[i]);
             yield return null;
         }
@@ -173,6 +175,7 @@ public class SpiderSpawner : MonoBehaviour
         for (int i = spiderMassList.Count - 1; i >= 0; i--)
         {
             Destroy(spiderMassList[i]);
+            spiderCountCurrent--;
             spiderTrickleList.Remove(spiderMassList[i]);
             yield return null;
         }

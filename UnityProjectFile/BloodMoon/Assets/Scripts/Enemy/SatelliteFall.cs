@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class SatelliteFall : MonoBehaviour {
 
     public float health = 5f;
@@ -12,6 +12,9 @@ public class SatelliteFall : MonoBehaviour {
 
     EventManager eScript;
 
+    public GameObject announcer;
+    public Text announceText;
+
     private void Start()
     {
         eScript = GameObject.Find("EventManager").GetComponent<EventManager>();
@@ -21,7 +24,8 @@ public class SatelliteFall : MonoBehaviour {
     void Update () {
 		if(health <= 0)
         {
-            rb.MovePosition(target.position);
+            transform.LookAt(target.position);
+            rb.AddForce(transform.forward * 5000, ForceMode.Force);
         }
 	}
 
@@ -37,6 +41,8 @@ public class SatelliteFall : MonoBehaviour {
 
         if (collision.gameObject.CompareTag("Temple"))
         {
+            announcer.SetActive(true);
+            announceText.text = "Temple Destroyed!";
             eScript.bossCount--;
             Instantiate(explosion, collision.contacts[0].point, collision.transform.rotation);
             Destroy(collision.gameObject);

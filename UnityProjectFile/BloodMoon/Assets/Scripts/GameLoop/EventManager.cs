@@ -14,12 +14,24 @@ public class EventManager : MonoBehaviour {
     public int bossCount = 6;
     public GameObject winScreen;
     public PlayerHealth hScript;
+    public GameObject explosion;
+    public GameObject planet;
+    SpiderSpawner sScript;
+
+    private void Start()
+    {
+        sScript = GetComponent<SpiderSpawner>();
+    }
 
     private void Update()
     {
         if(bossCount <= 0)
         {
             //end game!
+            
+            Instantiate(explosion, planet.transform.position, planet.transform.rotation);
+            Destroy(planet);
+
             winScreen.SetActive(true);
             hScript.Win();
         }
@@ -28,7 +40,7 @@ public class EventManager : MonoBehaviour {
     public void EventOne()
     {
 
-       
+       sScript.MassSpawn();
 
         for(int i=0; i< TurnOn.Length; i++)
         {

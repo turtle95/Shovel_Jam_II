@@ -24,10 +24,12 @@ public class spiders : MonoBehaviour
     private Animation _animation;
     private bool _wandering = false;
 
+    SpiderSpawner sScript;
 
     // Use this for initialization
     void Start()
     {
+        sScript = GameObject.Find("EventManager").GetComponent<SpiderSpawner>();
         rb = GetComponent<Rigidbody>();
         target = GameObject.FindWithTag("Player").transform;
         if (target == null)
@@ -138,6 +140,7 @@ public class spiders : MonoBehaviour
             aggro = false;
             rb.velocity = Vector3.zero;
             rb.isKinematic = true;
+            sScript.spiderCountCurrent--;
             Destroy(gameObject, 1.5f);
         }
         aggro = true; //mob was hit and is now aggroed

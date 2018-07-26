@@ -32,9 +32,11 @@ public class DayNightCycle : MonoBehaviour {
     public GameObject[] nightOff;
     public GameObject[] dayOn;
     public GameObject[] dayOff;
-
+    public SpiderSpawner sScript;
 
 	void Start() {
+
+        sScript = GetComponent<SpiderSpawner>();
         dayNightTimer = dayLength;
 		
         eScript = GameObject.Find("EventManager").GetComponent<EventManager>();
@@ -123,6 +125,9 @@ public class DayNightCycle : MonoBehaviour {
         {
             dayOff[i].SetActive(false);
         }
+
+        if (varTrack.eventOne)
+            sScript.ClearSpiders(false);
 
         if (varTrack.eventTwo)
             lavaScript.speed = 3f;

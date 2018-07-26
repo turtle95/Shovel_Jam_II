@@ -13,7 +13,7 @@ public class ExitPlanet : MonoBehaviour {
     variableTracker varTrack;
 
     public GameObject seal;
-
+    public DayNightCycle sScript;
     private void Start()
     {
         varTrack = GameObject.Find("variableTracker").GetComponent<variableTracker>();
@@ -37,10 +37,9 @@ public class ExitPlanet : MonoBehaviour {
             varTrack.outsidePlanet = true;
             //cScript.outsidePlanet = true;
 
-            //pScript.walkSpeed *= 4;
-           // pScript.runSpeed *= 4;
-           // pScript.jumpForce *= 2;
-            
+
+            // pScript.jumpForce *= 2;
+            sScript.enabled = false;
 
             StartCoroutine(BurstTimer());
 
@@ -50,8 +49,11 @@ public class ExitPlanet : MonoBehaviour {
 
     public IEnumerator BurstTimer()
     {
+        pScript.walkSpeed *= 2;
+        pScript.runSpeed *= 2;
         pScript.flying = true;
         yield return new WaitForSeconds(0.2f);
+        
         pScript.gravity -= 10;
         seal.SetActive(true);
         //pScript.flying = false;
