@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 114851547131872060}
   m_Layer: 10
   m_Name: Croissant
-  m_TagString: Croissant
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -365,6 +365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   burst: {fileID: 1293092315743404, guid: 9db9a25e2459fac4c93142b526d80c05, type: 2}
+  bulletType: 1
 --- !u!198 &198160844627762602
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -27,7 +27,7 @@ public class variableTracker : MonoBehaviour {
 
     public int currentNight = 0;
     public float dayNightTimer = 60;
-
+    public bool isNight = false;
 
     public bool eventOne = true;
     public bool eventTwo = false;

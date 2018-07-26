@@ -123,7 +123,7 @@ public class PlayerHealth : MonoBehaviour
         // Set the death flag so this function won't be called again.
         isDead = true;
         player.SetActive(false);
-        sun.dieOnNight = false;
+      
         deathPanel.SetActive(true);
 
         // Turn off any remaining shooting effects.

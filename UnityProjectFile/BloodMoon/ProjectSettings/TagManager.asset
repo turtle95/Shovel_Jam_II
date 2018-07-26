@@ -12,6 +12,7 @@ TagManager:
   - Enemy
   - Glowy
   - Temple
+  - Lava
   layers:
   - Default
   - TransparentFX
