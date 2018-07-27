@@ -46,6 +46,8 @@ public class DayNightCycle : MonoBehaviour {
         {
             glowies[i].SetActive(true);
         }
+
+        //InvokeRepeating("UpdateLight", 3f, 0.1f);
     }
 
     private void Update()
@@ -71,7 +73,7 @@ public class DayNightCycle : MonoBehaviour {
        
 
 
-        DynamicGI.UpdateEnvironment();
+        //DynamicGI.UpdateEnvironment(); //Makes transition smoother but is too costly to run every frame while using Mixed Lights
         if (dayNightTimer <= 10f)
         {
             if (varTrack.isNight)

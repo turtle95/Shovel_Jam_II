@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class spiders : MonoBehaviour
 {
+    public LayerMask terrainMask;
     public GameObject graphics;
     public float health = 5;
     public int moveSpeed = 20;
@@ -23,6 +24,7 @@ public class spiders : MonoBehaviour
     private Rigidbody rb;
     private Animation _animation;
     private bool _wandering = false;
+    private bool hibernate = false;
 
     SpiderSpawner sScript;
 
@@ -199,6 +201,19 @@ public class spiders : MonoBehaviour
 
     public void WorldGravity()
     {
+        //RaycastHit _hit;
+        //if (Physics.Raycast(transform.position + (transform.up * 1), -transform.up, out _hit, terrainMask))
+        //{
+        //    if (Vector3.Distance(_hit.point, transform.position) < 0.2f) //grounded
+        //    {
+        //        if (aggro != true)
+        //        {
+        //            hibernate = true;
+        //        }
+        //        return;
+        //    }
+        //}
+
         //gets the distance between player and planet, essentially this is the direction you want to be facing
         //gravityUp = (transform.position - planet.position).normalized;
         gravityUp = (planet.position - transform.position).normalized;
