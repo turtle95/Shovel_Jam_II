@@ -5,7 +5,7 @@ using UnityEngine;
 public class TurnOffAfterTime : MonoBehaviour {
 
 	// Use this for initialization
-	void Awake () {
+	void Start () {
         StartCoroutine(TurnThisOff());
 	}
 	

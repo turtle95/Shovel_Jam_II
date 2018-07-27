@@ -51,7 +51,7 @@ public class Stage3CamLook : MonoBehaviour {
 		float angle = transform.localEulerAngles.x;
 		angle = (angle > 180) ? angle - 360 : angle;
 
-		if (angle > 45f) {
+		if (angle > 85f) {
 			lookingDown = true;
 		} else
 			lookingDown = false;

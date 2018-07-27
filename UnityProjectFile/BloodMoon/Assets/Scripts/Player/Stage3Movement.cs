@@ -29,7 +29,7 @@ public class Stage3Movement : MonoBehaviour {
 
 
 	public float distToGrounded = 1f;
-	public float distToFall = 5f;
+	public float distToFall = 1.5f;
 
 
 	public Transform cameraYOnly;
@@ -189,7 +189,7 @@ public class Stage3Movement : MonoBehaviour {
 
         if (flying)
         {
-            rb.AddForce(transform.up * jumpForce * 5f, ForceMode.VelocityChange);
+            rb.AddForce(transform.up * jumpForce * 3f, ForceMode.VelocityChange);
             flying = false;
         }
 

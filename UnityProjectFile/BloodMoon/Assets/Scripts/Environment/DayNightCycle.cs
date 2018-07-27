@@ -108,7 +108,7 @@ public class DayNightCycle : MonoBehaviour {
         {
             
             lavaScript.enabled = true;
-            lavaScript.speed = 8f;
+           // lavaScript.speed = 8f;
         }
         if (varTrack.eventThree)
             eScript.EventThree();
@@ -129,8 +129,7 @@ public class DayNightCycle : MonoBehaviour {
         if (varTrack.eventOne)
             sScript.ClearSpiders(false);
 
-        if (varTrack.eventTwo)
-            lavaScript.speed = 3f;
+      
         dayNightTimer = dayLength;
         announcerText.text = "Morning";
         varTrack.isNight = false;
