@@ -27,69 +27,63 @@ public class FireRocks : MonoBehaviour {
     public float rockDisappearTime = 10;
 
     public Text ammoCount;
-	
+    bool loaded = false;
+    bool firePressed = false;
+
 	// Update is called once per frame
 	void Update () {
 
-		if(Input.GetButtonDown("Fire1"))
+        firePressed = Input.GetButton("Fire1");
+        
+
+
+		if((firePressed || Input.GetAxis("Right Trigger") !=0) && !loaded)
         {
             if (bulletType == 2)
                 shovelJavelin.SetActive(true);
             else if (bulletType == 3)
                 juiceSpray.SetActive(true);
+            loaded = true;
         }
 
-        if (Input.GetButton("Fire1"))
+        if (loaded)
         {
             if (bulletType == 2) { }
             if (shovelCharge < 2.5f)
-                shovelCharge += Time.deltaTime *2;
+                shovelCharge += Time.deltaTime * 2;
 
             if (bulletType == 3)
             {
                 ammo -= Time.deltaTime;
             }
-        }
 
-        if (Input.GetButtonUp ("Fire1"))
-        { //If someone presses Fire1 then spawn a rock at the spawn point and give it a launch speed
 
-            switch (bulletType)
-            {
-                case 1:
-                    audManager.PlayOneShot(shootSound);
-                    rockUsedHere = Instantiate(rock, spawnPoint.position, spawnPoint.rotation);
-                    rb = rockUsedHere.GetComponent<Rigidbody>();
-                    rb.velocity = spawnPoint.forward * launchSpeed;
-                    break;
-                case 2:
-                    audManager.PlayOneShot(shootSound);
-                    rockUsedHere = Instantiate(shovel, shovelJavelin.transform.position, shovelJavelin.transform.rotation);
-                    rb = rockUsedHere.GetComponent<Rigidbody>();
-                    rb.velocity = spawnPoint.forward * launchSpeed * shovelCharge;
-                    shovelCharge = 0;
-                    ammo -= 1;
-                    shovelJavelin.SetActive(false);
-                    break;
-                case 3:
-                    //audManager.PlayOneShot(shootSound);
-                    juiceSpray.SetActive(false);
-                   // rb = rockUsedHere.GetComponent<Rigidbody>();
-                    //rb.velocity = spawnPoint.forward * launchSpeed * 0.6f;
-                    break;
+            if (!firePressed && Input.GetAxis("Right Trigger") == 0)
+            { //If someone presses Fire1 then spawn a rock at the spawn point and give it a launch speed
+                loaded = false;
+                switch (bulletType)
+                {
+                    case 1:
+                        audManager.PlayOneShot(shootSound);
+                        rockUsedHere = Instantiate(rock, spawnPoint.position, spawnPoint.rotation);
+                        rb = rockUsedHere.GetComponent<Rigidbody>();
+                        rb.velocity = spawnPoint.forward * launchSpeed;
+                        break;
+                    case 2:
+                        audManager.PlayOneShot(shootSound);
+                        rockUsedHere = Instantiate(shovel, shovelJavelin.transform.position, shovelJavelin.transform.rotation);
+                        rb = rockUsedHere.GetComponent<Rigidbody>();
+                        rb.velocity = spawnPoint.forward * launchSpeed * shovelCharge;
+                        shovelCharge = 0;
+                        ammo -= 1;
+                        shovelJavelin.SetActive(false);
+                        break;
+                    case 3:
+                        juiceSpray.SetActive(false);
+                        break;
+                }
             }
-
-           
-           
-            //audManager.PlayOneShot(shootSound);
-			//rockUsedHere = Instantiate (rock, spawnPoint.position, spawnPoint.rotation);
-			//rockUsedHere.transform.localScale *= rockSize;
-			//rockUsedHere.GetComponent<RockBreakController> ().rockSize = rockSize;
-			//rb = rockUsedHere.GetComponent<Rigidbody> ();
-			
-			//rb.velocity = spawnPoint.forward * launchSpeed;
-			//lineDraw.SetActive (false);
-		} 
+        }
 
         //remove the game obj after x sec
         Destroy(this.rockUsedHere, rockDisappearTime);
