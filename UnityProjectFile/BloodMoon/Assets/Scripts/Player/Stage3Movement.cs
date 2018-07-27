@@ -62,12 +62,8 @@ public class Stage3Movement : MonoBehaviour {
 
     variableTracker varTrack;
     public bool recovering = false;
-
-    bool sprintPressed = false;
-
-
-
-
+    //public bool outsidePlanet = false;
+    bool oldTriggerHeld;
     void Start () {
         varTrack = GameObject.Find("variableTracker").GetComponent<variableTracker>();
         rb = GetComponent<Rigidbody> (); //assigns rb to the player's rigidbody
@@ -131,7 +127,7 @@ public class Stage3Movement : MonoBehaviour {
 
 
         //dashes then calls the dash stop function
-		if (Input.GetButtonDown ("Dash") && !recovering) {
+		if (Input.GetButtonDown ("Fire2") && !recovering) {
             hScript.currentEnergy -= 10;
             audManager.PlayOneShot(dashSound);
 			rb.AddForce(movement *dashDistance, ForceMode.Impulse);
@@ -155,24 +151,23 @@ public class Stage3Movement : MonoBehaviour {
           //  dashParticles2.Play();
         }
 
-        Debug.Log(Input.GetButton("Fire3"));
+        Debug.Log(Input.GetAxisRaw("Left Trigger"));
+        
 
-        sprintPressed = Input.GetButton("Fire3");
+        if (Input.GetButtonDown("Fire3") || Input.GetAxis("Left Trigger") != 0)
+        {
+            walkSpeed = runSpeed;
+            hScript.energyGain = -2;
+           
+           // dashParticles.Play();
+           // dashParticles2.Play();
+        }
 
-
-        if (!sprintPressed && Input.GetAxis("Left Trigger") == 0)
+        if (Input.GetButtonUp("Fire3") || Input.GetAxis("Left Trigger") == 0)
         {
             hScript.energyGain = 1;
             walkSpeed = refWalkSpeed;
         }
-
-        if (sprintPressed || Input.GetAxis("Left Trigger") != 0)
-        {
-            walkSpeed = runSpeed;
-            hScript.energyGain = -2;
-
-        } 
-
         if (recovering)
             movement = Vector3.zero;
 	}
