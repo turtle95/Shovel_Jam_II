@@ -16,7 +16,7 @@ public class DayNightCycle : MonoBehaviour {
     EventManager eScript;
     float dayNightTimer = 60f;
     float dayLength = 60f;
-    float speed = 6f;
+    float speed = 2f;
 
     public Image daySlider;
     public Image nightSlider;

@@ -14,6 +14,7 @@ public class ExitPlanet : MonoBehaviour {
 
     public GameObject seal;
     public DayNightCycle sScript;
+    public SpiderSpawner eScript;
     private void Start()
     {
         varTrack = GameObject.Find("variableTracker").GetComponent<variableTracker>();
@@ -49,6 +50,7 @@ public class ExitPlanet : MonoBehaviour {
 
     public IEnumerator BurstTimer()
     {
+        eScript.ClearSpiders(true);
         pScript.walkSpeed *= 2;
         pScript.runSpeed *= 2;
         pScript.flying = true;
