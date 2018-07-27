@@ -63,8 +63,8 @@ public class Stage3Movement : MonoBehaviour {
     variableTracker varTrack;
     public bool recovering = false;
     //public bool outsidePlanet = false;
-
-	void Start () {
+    bool oldTriggerHeld;
+    void Start () {
         varTrack = GameObject.Find("variableTracker").GetComponent<variableTracker>();
         rb = GetComponent<Rigidbody> (); //assigns rb to the player's rigidbody
 		refWalkSpeed = walkSpeed;
@@ -151,17 +151,19 @@ public class Stage3Movement : MonoBehaviour {
           //  dashParticles2.Play();
         }
 
+        Debug.Log(Input.GetAxisRaw("Left Trigger"));
+        
 
-
-        if (Input.GetButtonDown("Fire3"))
+        if (Input.GetButtonDown("Fire3") || Input.GetAxis("Left Trigger") != 0)
         {
             walkSpeed = runSpeed;
             hScript.energyGain = -2;
+           
            // dashParticles.Play();
            // dashParticles2.Play();
         }
 
-        if (Input.GetButtonUp("Fire3"))
+        if (Input.GetButtonUp("Fire3") || Input.GetAxis("Left Trigger") == 0)
         {
             hScript.energyGain = 1;
             walkSpeed = refWalkSpeed;
