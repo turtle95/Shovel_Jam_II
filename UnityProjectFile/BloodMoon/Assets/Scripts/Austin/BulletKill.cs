@@ -10,11 +10,6 @@ public class BulletKill : MonoBehaviour {
     //checks if this is a shovel or a croissant
     public int bulletType = 1;
 
-    public AudioSource crush;
-    public AudioClip hitSound;
-
-    bool playedSound = false;
-
     private void Start()
     {
         StartCoroutine(KillBullet());
@@ -22,14 +17,8 @@ public class BulletKill : MonoBehaviour {
 
     void OnCollisionEnter(Collision other)
     {
-        if (!playedSound)
-        {
-            crush.PlayOneShot(hitSound);
-            playedSound = true;
-        }
         if (other.gameObject.CompareTag("Enemy"))
         {
-           
             switch (bulletType)
             {
                 case 1:
