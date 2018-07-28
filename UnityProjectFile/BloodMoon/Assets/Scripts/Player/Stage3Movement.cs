@@ -62,8 +62,10 @@ public class Stage3Movement : MonoBehaviour {
 
     variableTracker varTrack;
     public bool recovering = false;
-    //public bool outsidePlanet = false;
-    bool oldTriggerHeld;
+
+    bool sprintPressed = false;
+
+
     void Start () {
         varTrack = GameObject.Find("variableTracker").GetComponent<variableTracker>();
         rb = GetComponent<Rigidbody> (); //assigns rb to the player's rigidbody
@@ -90,7 +92,7 @@ public class Stage3Movement : MonoBehaviour {
         {
             if (Grounded() == true && footstepManager.isPlaying == false)
             {
-                if (Input.GetButtonDown("Fire3"))
+                if (Input.GetButtonDown("Sprint"))
                 {
                     footstepManager.pitch = Random.Range(1.8f, 2.5f);
                 }
@@ -127,7 +129,7 @@ public class Stage3Movement : MonoBehaviour {
 
 
         //dashes then calls the dash stop function
-		if (Input.GetButtonDown ("Fire2") && !recovering) {
+		if (Input.GetButtonDown ("Dash") && !recovering) {
             hScript.currentEnergy -= 10;
             audManager.PlayOneShot(dashSound);
 			rb.AddForce(movement *dashDistance, ForceMode.Impulse);
@@ -145,25 +147,20 @@ public class Stage3Movement : MonoBehaviour {
             hScript.currentEnergy -= 5;
             audManager.PlayOneShot(jumpSound);
             jumping = true;
-            
-            
-          //  dashParticles.Play();
-          //  dashParticles2.Play();
+
         }
 
-        Debug.Log(Input.GetAxisRaw("Left Trigger"));
-        
 
-        if (Input.GetButtonDown("Fire3") || Input.GetAxis("Left Trigger") != 0)
+        sprintPressed = Input.GetButton("Sprint");
+
+        if (sprintPressed || Input.GetAxis("Left Trigger") != 0)
         {
             walkSpeed = runSpeed;
             hScript.energyGain = -2;
-           
-           // dashParticles.Play();
-           // dashParticles2.Play();
+
         }
 
-        if (Input.GetButtonUp("Fire3") || Input.GetAxis("Left Trigger") == 0)
+        if (!sprintPressed && Input.GetAxis("Left Trigger") == 0)
         {
             hScript.energyGain = 1;
             walkSpeed = refWalkSpeed;

@@ -18,9 +18,13 @@ public class EventManager : MonoBehaviour {
     public GameObject planet;
     SpiderSpawner sScript;
 
+
+    
+
     private void Start()
     {
         sScript = GetComponent<SpiderSpawner>();
+     
     }
 
     private void Update()
@@ -36,6 +40,8 @@ public class EventManager : MonoBehaviour {
             hScript.Win();
         }
     }
+
+    
 
     public void EventOne()
     {

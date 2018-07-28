@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
 public class variableTracker : MonoBehaviour {
 
     bool inputDecided = false;
@@ -35,9 +35,11 @@ public class variableTracker : MonoBehaviour {
     public bool eventThree = false;
 
     public bool outsidePlanet = false;
-
+    public GameObject announcer;
+    Text announcerText;
 	// Use this for initialization
 	void Start () {
+        announcerText = announcer.GetComponent<Text>();
         hScript = GameObject.Find("PlayerPrefab").GetComponent<PlayerHealth>();
         mScript = GameObject.Find("PlayerBox").GetComponent<Stage3Movement>();
 	}
@@ -67,6 +69,8 @@ public class variableTracker : MonoBehaviour {
     //adds to your health stats
     public void AddHealth()
     {
+        announcer.SetActive(true);
+        announcerText.text = "Obtained Ship Parts!";
         healthText.SetActive(true);
         hScript.currentHealth += 2;
         //hScript.healthSlider.maxValue += 1;
@@ -75,6 +79,8 @@ public class variableTracker : MonoBehaviour {
     //adds to your stamina stats
     public void AddStamina()
     {
+        announcer.SetActive(true);
+        announcerText.text = "Obtained Ship Parts!";
         staminaText.SetActive(true);
         hScript.currentEnergy += 10;
        // hScript.energySlider.maxValue += 5;
@@ -83,16 +89,20 @@ public class variableTracker : MonoBehaviour {
     //adds to your speed stats
     public void AddSpeed()
     {
+        announcer.SetActive(true);
+        announcerText.text = "Obtained Ship Parts!";
         speedText.SetActive(true);
-        mScript.refWalkSpeed += 1;
-        mScript.walkSpeed += 1;
-        mScript.runSpeed += 1;
-        mScript.dashDistance += 1;
+        mScript.refWalkSpeed += 5;
+        mScript.walkSpeed += 5;
+        mScript.runSpeed += 5;
+        mScript.dashDistance += 5;
     }
 
     //Displays text based on which weapon you picked up
    public void GrabWeapon(int chosen)
     {
+        announcer.SetActive(true);
+        announcerText.text = "Obtained Ship Parts!";
         switch (chosen)
         {
             case 1: shovelText.SetActive(true);
