@@ -1,70 +1,29 @@
 fileFormatVersion: 2
-guid: bbf0dd08ad6809d47bc73842e96e2220
+guid: dd17993a1312a5740bfdae574ae2c30c
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: Bowl
-    100002: Fish (2)
-    100004: Fish (3)
-    100006: FishBarrel
-    100008: //RootNode
-    100010: Texture Group
-    400000: Bowl
-    400002: Fish (2)
-    400004: Fish (3)
-    400006: FishBarrel
-    400008: //RootNode
-    400010: Texture Group
-    2100000: Stand
-    2100002: FishBowl
-    2100004: FishBody
-    2100006: FishFins
-    2100008: FishEyes
-    2300000: Bowl
-    2300002: Fish (2)
-    2300004: Fish (3)
-    2300006: FishBarrel
-    3300000: Bowl
-    3300002: Fish (2)
-    3300004: Fish (3)
-    3300006: FishBarrel
-    4300000: FishBarrel
-    4300002: Bowl
-    4300004: Fish (2)
-    4300006: Fish (3)
-    6400000: Bowl
-    6400002: Fish (2)
-    6400004: Fish (3)
-    6400006: FishBarrel
-    7400000: Sit
-    7400002: Shoot
-    9500000: //RootNode
+    100000: Crown
+    100002: //RootNode
+    100004: Loose
+    100006: Texture Group
+    400000: Crown
+    400002: //RootNode
+    400004: Loose
+    400006: Texture Group
+    2100000: Loose
+    2300000: Crown
+    2300002: Loose
+    3300000: Crown
+    3300002: Loose
+    4300000: Crown
+    4300002: Loose
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: FishBody
-    second: {fileID: 2100000, guid: 2411345c16d0a0d4085c2c19b46cce05, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: FishBowl
-    second: {fileID: 2100000, guid: 4d39dd4b093d89746b375d9ebb3319a3, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: FishEyes
-    second: {fileID: 2100000, guid: 0f7e961ee80640743be2985a21e68a74, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: FishFins
-    second: {fileID: 2100000, guid: d570e0bd9c05af347a255a32728e07f8, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Stand
-    second: {fileID: 2100000, guid: 98c5ce21a0b8157449281695328d897c, type: 2}
+      name: Loose
+    second: {fileID: 2100000, guid: 64636cc463dae0b4488926daf6af59b6, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -97,7 +56,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -115,14 +74,14 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
-    hasPreviousCalculatedGlobalScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
@@ -141,7 +100,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
