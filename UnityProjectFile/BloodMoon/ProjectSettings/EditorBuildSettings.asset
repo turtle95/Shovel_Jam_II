@@ -9,12 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 5c28efd34e85c9344a943c5b0b0d9520
   - enabled: 1
-    path: Assets/Scenes/ShipMenu.unity
-    guid: dbbb935f21c401f4aae32f337ed0e2c8
+    path: Assets/Scenes/Ship_Interior_Test.unity
+    guid: 41b9151714f2bd04cacf11efb6597bcc
   - enabled: 1
     path: Assets/Scenes/Main.unity
     guid: ec6ba99108508c64a9e801f5b04f9bac
-  - enabled: 0
-    path: Assets/Scenes/JoshTestScene.unity
-    guid: 1e13ed801d0749c4badecff3cdaa6cc2
   m_configObjects: {}

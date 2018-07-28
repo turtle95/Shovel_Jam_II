@@ -20,6 +20,11 @@ public class SpiderSpawner : MonoBehaviour
     //[HideInInspector] public enum Clear { All, Trickle, Mass };
     private bool massSpawning = false;
 
+
+    //variable to give the spiders a size range
+    float sizeRange;
+
+
     // Use this for initialization
     void Start()
     {
@@ -71,6 +76,8 @@ public class SpiderSpawner : MonoBehaviour
                 // we hit a spawnable area
                 Vector3 pointAboveGround = 1f * Vector3.Normalize(randomPoint - hit.point) + hit.point; //!! hit.point isn't always on ground
                 GameObject obj = Instantiate(spiderPrefab, pointAboveGround, Quaternion.identity);
+                sizeRange = Random.Range(1, 10);
+                obj.GetComponent<Transform>().localScale = new Vector3(sizeRange, sizeRange, sizeRange);
                 spiders spiderScript = obj.GetComponent<spiders>();
                 spiderScript.planet = planet; //the planet that these spiders belong to
                 spiderScript.target = player.transform;
@@ -106,6 +113,8 @@ public class SpiderSpawner : MonoBehaviour
                 // we hit a spawnable area
                 Vector3 pointAboveGround = 1f * Vector3.Normalize(randomPoint - hit.point) + hit.point; //!! hit.point isn't always on ground
                 GameObject obj = Instantiate(spiderPrefab, pointAboveGround, Quaternion.identity);
+                sizeRange = Random.Range(1, 20);
+                obj.GetComponent<Transform>().localScale = new Vector3(sizeRange, sizeRange, sizeRange);
                 spiders spiderScript = obj.GetComponent<spiders>();
                 spiderScript.planet = planet; //the planet that these spiders belong to
                 //spiderScript.target = player.transform;

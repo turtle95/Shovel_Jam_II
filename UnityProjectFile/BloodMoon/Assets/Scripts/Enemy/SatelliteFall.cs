@@ -41,9 +41,10 @@ public class SatelliteFall : MonoBehaviour {
 
         if (collision.gameObject.CompareTag("Temple"))
         {
-            announcer.SetActive(true);
-            announceText.text = "Temple Destroyed!";
             eScript.bossCount--;
+            announcer.SetActive(true);
+            announceText.text = "Temple Destroyed!" + eScript.bossCount + " left to decimate.";
+           
             Instantiate(explosion, collision.contacts[0].point, collision.transform.rotation);
             Destroy(collision.gameObject);
             Destroy(this.gameObject);

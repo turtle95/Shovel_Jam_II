@@ -15,6 +15,11 @@ public class ExitPlanet : MonoBehaviour {
     public GameObject seal;
     public DayNightCycle sScript;
     public SpiderSpawner eScript;
+
+    public Transform playerTrans;
+    public Transform camGrav;
+
+
     private void Start()
     {
         varTrack = GameObject.Find("variableTracker").GetComponent<variableTracker>();
@@ -55,7 +60,8 @@ public class ExitPlanet : MonoBehaviour {
         pScript.runSpeed *= 2;
         pScript.flying = true;
         yield return new WaitForSeconds(0.2f);
-        
+        camGrav.rotation = playerTrans.rotation;
+
         pScript.gravity += 10;
         seal.SetActive(true);
         //pScript.flying = false;
