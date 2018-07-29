@@ -170,8 +170,8 @@ public class spiders : MonoBehaviour
         if (otherObj.tag == "Player")
         { //when the player is in range, turn on movement
             aggro = true;
-            _animation.Play("run");
-            _animation["run"].speed = 4;
+         //   _animation.Play("run");
+          //  _animation["run"].speed = 4;
         }
         if (otherObj.tag == "Boundary")
         { //if the mob runs into the ocean (boundary) destroy it

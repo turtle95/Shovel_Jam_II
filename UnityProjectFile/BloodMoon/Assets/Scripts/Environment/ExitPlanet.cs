@@ -62,7 +62,7 @@ public class ExitPlanet : MonoBehaviour {
         pScript.flying = true;
         yield return new WaitForSeconds(0.2f);
         camGrav.rotation = playerTrans.rotation;
-
+        eScript.enabled = false;
         pScript.gravity += 10;
         seal.SetActive(true);
         //pScript.flying = false;

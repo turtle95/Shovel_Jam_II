@@ -10,7 +10,7 @@ public class Hints : MonoBehaviour {
     public int currentHint = 0;
 
     variableTracker varTrack;
-
+    public bool hintUp = false;
     private void Start()
     {
         varTrack = GameObject.Find("variableTracker").GetComponent<variableTracker>();
@@ -25,22 +25,30 @@ public class Hints : MonoBehaviour {
         if (varTrack.eventThree)
             currentHint = 3;
 
+        //if (Input.GetButtonDown("Hint"))
+        //    hintUp = !hintUp;
 
-        if (Input.GetButtonDown("Hint"))
-        {
-            Time.timeScale = 0f;
-            hints.SetActive(true);
-            for(int i=0; i<messages.Length; i++)
+       
+            if (Input.GetButtonDown("Hint"))
             {
-                messages[i].SetActive(false);
+               
+                Time.timeScale = 0f;
+                hints.SetActive(true);
+                for (int i = 0; i < messages.Length; i++)
+                {
+                    messages[i].SetActive(false);
+                }
+                messages[currentHint].SetActive(true);
+                //hintUp = true;
             }
-            messages[currentHint].SetActive(true);
-        }
+      
+            if (Input.GetButtonUp("Jump") )
+            {
+               // hintUp = false;
+                Time.timeScale = 1f;
+                hints.SetActive(false);
 
-        if (Input.GetButtonDown("Jump"))
-        {
-            Time.timeScale = 1f;
-            hints.SetActive(false);
-        }
-	}
+            }
+        
+    }
 }
