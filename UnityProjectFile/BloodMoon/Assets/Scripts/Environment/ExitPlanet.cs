@@ -43,7 +43,8 @@ public class ExitPlanet : MonoBehaviour {
             varTrack.outsidePlanet = true;
             //cScript.outsidePlanet = true;
 
-
+            varTrack.eventTwo = false;
+            varTrack.eventThree = true;
             // pScript.jumpForce *= 2;
             sScript.enabled = false;
 

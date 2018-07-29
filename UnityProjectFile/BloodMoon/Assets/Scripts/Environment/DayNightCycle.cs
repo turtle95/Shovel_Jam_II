@@ -34,11 +34,14 @@ public class DayNightCycle : MonoBehaviour {
     public GameObject[] dayOff;
     public SpiderSpawner sScript;
 
+
+    Hints hintScript;
+
 	void Start() {
 
         sScript = GetComponent<SpiderSpawner>();
         dayNightTimer = dayLength;
-		
+		hintScript = GameObject.Find("EventManager").GetComponent<Hints>();
         eScript = GameObject.Find("EventManager").GetComponent<EventManager>();
         varTrack = GameObject.Find("variableTracker").GetComponent<variableTracker>();
         glowies = GameObject.FindGameObjectsWithTag("Glowy");
@@ -105,7 +108,11 @@ public class DayNightCycle : MonoBehaviour {
 
         //Triggers events based on what is turned on/off
         if (varTrack.eventOne)
+        {
             eScript.EventOne();
+            hintScript.currentHint = 1;
+        }
+           
         if (varTrack.eventTwo)
         {
             

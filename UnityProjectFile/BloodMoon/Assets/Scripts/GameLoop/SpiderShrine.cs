@@ -43,6 +43,7 @@ public class SpiderShrine : MonoBehaviour {
     {
         if (collision.gameObject.CompareTag("Bullet") && !varTrack.isNight && varTrack.eventOne)
         {
+            
             aSource.PlayOneShot(aClip);
             varTrack.eventOne = false;
             varTrack.eventTwo = true;

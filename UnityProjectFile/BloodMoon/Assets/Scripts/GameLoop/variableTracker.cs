@@ -47,20 +47,20 @@ public class variableTracker : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetKeyDown(KeyCode.P))
-            SceneManager.LoadScene(0);
+        //if (Input.GetKeyDown(KeyCode.P))
+        //    SceneManager.LoadScene(0);
 
-        if (Input.GetKeyDown(KeyCode.Escape) && pauseMenu.activeSelf == true)
-        {
-            Time.timeScale = 1;
-            pauseMenu.SetActive(false);
-        }
+        //if (Input.GetKeyDown(KeyCode.Escape) && pauseMenu.activeSelf == true)
+        //{
+        //    Time.timeScale = 1;
+        //    pauseMenu.SetActive(false);
+        //}
 
-        else if (Input.GetKeyDown(KeyCode.Escape) && pauseMenu.activeSelf == false)
-        {
-            Time.timeScale = 0;
-            pauseMenu.SetActive(true);
-        }
+        //else if (Input.GetKeyDown(KeyCode.Escape) && pauseMenu.activeSelf == false)
+        //{
+        //    Time.timeScale = 0;
+        //    pauseMenu.SetActive(true);
+        //}
 
         if (!inputDecided)
             TestForController();
