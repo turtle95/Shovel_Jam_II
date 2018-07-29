@@ -188,7 +188,7 @@ public class Stage3Movement : MonoBehaviour {
 
         if (flying)
         {
-            rb.AddForce(transform.up * jumpForce * 3f, ForceMode.VelocityChange);
+            rb.AddForce(transform.up * jumpForce * 6f, ForceMode.VelocityChange);
             flying = false;
         }
 

@@ -25,6 +25,11 @@ public class PlaySelected : MonoBehaviour {
         soundPlayer.SetActive(true);
         yield return new WaitForSeconds(1);
         darkness.SetActive(true);
-        SceneManager.LoadScene(2);
+        AsyncOperation async = SceneManager.LoadSceneAsync(2);
+
+        while (!async.isDone)
+        {
+            yield return null;
+        }
     }
 }
