@@ -78,7 +78,8 @@ public class SpiderSpawner : MonoBehaviour
                 GameObject obj = Instantiate(spiderPrefab, pointAboveGround, Quaternion.identity);
                 sizeRange = Random.Range(1, 10);
                 obj.GetComponent<Transform>().localScale = new Vector3(sizeRange, sizeRange, sizeRange);
-                spiders spiderScript = obj.GetComponent<spiders>();
+                //spiders spiderScript = obj.GetComponent<spiders>();
+                SpiderCustomPhysics spiderScript = obj.GetComponent<SpiderCustomPhysics>();
                 spiderScript.planet = planet; //the planet that these spiders belong to
                 spiderScript.target = player.transform;
 
@@ -115,7 +116,8 @@ public class SpiderSpawner : MonoBehaviour
                 GameObject obj = Instantiate(spiderPrefab, pointAboveGround, Quaternion.identity);
                 sizeRange = Random.Range(1, 20);
                 obj.GetComponent<Transform>().localScale = new Vector3(sizeRange, sizeRange, sizeRange);
-                spiders spiderScript = obj.GetComponent<spiders>();
+               // spiders spiderScript = obj.GetComponent<spiders>();
+                SpiderCustomPhysics spiderScript = obj.GetComponent<SpiderCustomPhysics>();
                 spiderScript.planet = planet; //the planet that these spiders belong to
                 //spiderScript.target = player.transform;
 

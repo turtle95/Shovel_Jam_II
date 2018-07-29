@@ -18141,6 +18141,8 @@ MonoBehaviour:
   announcer: {fileID: 469743723}
   dayModel: {fileID: 97753252}
   nightModel: {fileID: 1651092555}
+  aSource: {fileID: 0}
+  aClip: {fileID: 0}
 --- !u!65 &690002739
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24533,7 +24535,7 @@ MonoBehaviour:
     m_Bits: 512
   planet: {fileID: 2006190829}
   player: {fileID: 1613769627}
-  spiderPrefab: {fileID: 1434384512315058, guid: 58a3863cb3f33d94bb70d87446541ee3,
+  spiderPrefab: {fileID: 1231636264605582, guid: 07c32929c9a548743a3c611499a84811,
     type: 2}
   trickleOnStart: 1
   stopTrickle: 0
@@ -24558,6 +24560,13 @@ MonoBehaviour:
   hScript: {fileID: 1613769628}
   explosion: {fileID: 1757805542115268, guid: b8b237f17dd1ba74a96ff321cca1de14, type: 2}
   planet: {fileID: 2006190828}
+  shipSpawn: {fileID: 0}
+  ducktapeSpawn: {fileID: 0}
+  duckTape: {fileID: 0}
+  ship: {fileID: 0}
+  antenna: {fileID: 0}
+  planetCrust: {fileID: 0}
+  uI: []
   TurnOn2:
   - {fileID: 1800507029}
   TurnOff2: []
@@ -37886,6 +37895,8 @@ MonoBehaviour:
   seal: {fileID: 204703887}
   sScript: {fileID: 1034720742}
   eScript: {fileID: 1034720743}
+  playerTrans: {fileID: 0}
+  camGrav: {fileID: 0}
 --- !u!65 &1584216740
 BoxCollider:
   m_ObjectHideFlags: 0
