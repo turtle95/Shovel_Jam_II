@@ -68,13 +68,13 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
     - _Freezeeffectnormal: 7.99
-    - _Gloss: 0.755
+    - _Gloss: 0.774
     - _GlossMapScale: 1
     - _Glossiness: 0.64
     - _GlossyReflections: 1
     - _Ice_fresnel: 2.94
     - _LocalGlobal: 0
-    - _Metallic: 0.16
+    - _Metallic: 0.179
     - _Mode: 3
     - _OcclusionStrength: 1
     - _Parallax: 0.02

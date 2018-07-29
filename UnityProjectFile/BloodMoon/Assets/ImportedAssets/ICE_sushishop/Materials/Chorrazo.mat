@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Chorrazo
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 45, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _EMISSION _NODE_2671_ON _SWITCHDIREC_ON
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
@@ -67,6 +67,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _node_3943:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1.02, y: 1}
@@ -85,7 +89,7 @@ Material:
     - _Gloss: 0.492
     - _Gloss2: 0.763
     - _GlossMapScale: 1
-    - _Glossiness: 0.955
+    - _Glossiness: 0.379
     - _GlossyReflections: 1
     - _Ice_fres: 2.54
     - _Ice_fresnel: 0.83
@@ -112,8 +116,9 @@ Material:
     - _node_9046: 1.12
     - _snow_slider: 0
     m_Colors:
-    - _Color: {r: 0.49264705, g: 0.26880735, b: 0.028979236, a: 0.747}
+    - _Color: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 0.1254902}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _node_5379: {r: 1, g: 0.6397059, b: 0.6397059, a: 1}
     - _node_6644: {r: 0.5147059, g: 0.7389455, b: 1, a: 1}
     - _node_9193: {r: 1, g: 1, b: 0.49264705, a: 1}
