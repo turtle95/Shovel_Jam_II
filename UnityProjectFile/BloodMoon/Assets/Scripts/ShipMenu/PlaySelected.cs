@@ -7,8 +7,8 @@ public class PlaySelected : MonoBehaviour {
 
 
     public GameObject moon;
-    public AudioClip crashSound;
-    public AudioSource soundPlayer;
+    //public AudioClip crashSound;
+    public GameObject soundPlayer;
     public CameraShake csScript;
     public GameObject darkness;
 
@@ -22,8 +22,7 @@ public class PlaySelected : MonoBehaviour {
         moon.SetActive(true);
         yield return new WaitForSeconds(2);
         StartCoroutine(csScript.Shake(1, 0.1f));
-        soundPlayer.clip = crashSound;
-        soundPlayer.Play();
+        soundPlayer.SetActive(true);
         yield return new WaitForSeconds(1);
         darkness.SetActive(true);
         SceneManager.LoadScene(2);
