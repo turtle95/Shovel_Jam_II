@@ -5,11 +5,16 @@ using UnityEngine;
 public class TurnOffAfterTime : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
+	//void Start () {
+ //       StartCoroutine(TurnThisOff());
+	//}
+
+    void Awake()
+    {
         StartCoroutine(TurnThisOff());
-	}
-	
-	IEnumerator TurnThisOff()
+    }
+
+    IEnumerator TurnThisOff()
     {
         yield return new WaitForSeconds(2);
         this.gameObject.SetActive(false);

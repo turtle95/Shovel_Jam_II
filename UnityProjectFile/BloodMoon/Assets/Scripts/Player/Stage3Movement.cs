@@ -162,7 +162,7 @@ public class Stage3Movement : MonoBehaviour {
 
         if (!sprintPressed && Input.GetAxis("Left Trigger") == 0)
         {
-            hScript.energyGain = 1;
+            hScript.energyGain = 5;
             walkSpeed = refWalkSpeed;
         }
         if (recovering)

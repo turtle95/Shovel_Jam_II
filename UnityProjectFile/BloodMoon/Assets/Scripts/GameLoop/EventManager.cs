@@ -19,25 +19,40 @@ public class EventManager : MonoBehaviour {
     SpiderSpawner sScript;
 
 
-    
+    public Transform shipSpawn;
+    public Transform ducktapeSpawn;
+    public GameObject duckTape;
+    public GameObject ship;
+    public GameObject antenna;
+    public GameObject planetCrust;
+    public GameObject[] uI;
+
+
 
     private void Start()
     {
         sScript = GetComponent<SpiderSpawner>();
-     
+        planetCrust.SetActive(false);
     }
 
     private void Update()
     {
         if(bossCount <= 0)
         {
+            for(int i=0; i< uI.Length; i++)
+            {
+                uI[i].SetActive(false);
+            }
+
             //end game!
-            
+            antenna.SetActive(false);
             Instantiate(explosion, planet.transform.position, planet.transform.rotation);
             Destroy(planet);
-
+                      
             winScreen.SetActive(true);
             hScript.Win();
+            Instantiate(duckTape, ducktapeSpawn.position, ducktapeSpawn.rotation);
+            Instantiate(ship, shipSpawn.position, shipSpawn.rotation);
         }
     }
 

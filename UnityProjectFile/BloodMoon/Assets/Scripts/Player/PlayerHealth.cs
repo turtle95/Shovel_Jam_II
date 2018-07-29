@@ -31,7 +31,7 @@ public class PlayerHealth : MonoBehaviour
     bool isDead;                                                // Whether the player is dead.
     public bool damaged;                                               // True when the player gets damaged.
 
-    public int energyGain = 1;
+    public int energyGain = 3;
     public Animator screenFlash;
     public GameObject player;
     public GameObject deathPanel;
