@@ -12,8 +12,17 @@ public class PlaySelected : MonoBehaviour {
     public CameraShake csScript;
     public GameObject darkness;
 
+    public GameObject credits;
+    public GameObject thanks;
+    public GameObject quit;
+
 	// Use this for initialization
-	void Start () {
+	void Awake () {
+
+        credits.SetActive(false);
+        thanks.SetActive(false);
+        quit.SetActive(false);
+
         StartCoroutine(RunEvents());
 	}
 	
