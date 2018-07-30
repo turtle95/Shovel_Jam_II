@@ -19,7 +19,7 @@ public class ExitPlanet : MonoBehaviour {
     public Transform playerTrans;
     public Transform camGrav;
 
-
+    public FireRocks shootScript;
     private void Start()
     {
         varTrack = GameObject.Find("variableTracker").GetComponent<variableTracker>();
@@ -42,7 +42,7 @@ public class ExitPlanet : MonoBehaviour {
             //reverses the gravity
             varTrack.outsidePlanet = true;
             //cScript.outsidePlanet = true;
-
+            shootScript.launchSpeed *= 3;
             varTrack.eventTwo = false;
             varTrack.eventThree = true;
             // pScript.jumpForce *= 2;
@@ -63,7 +63,7 @@ public class ExitPlanet : MonoBehaviour {
         yield return new WaitForSeconds(0.2f);
         camGrav.rotation = playerTrans.rotation;
         eScript.enabled = false;
-        pScript.gravity += 10;
+        pScript.gravity = -5f;
         seal.SetActive(true);
         //pScript.flying = false;
         Destroy(this.gameObject);

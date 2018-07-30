@@ -31,8 +31,13 @@ public class FireRocks : MonoBehaviour {
     bool loaded = false;
     bool buttonPressed = false;
 
-	// Update is called once per frame
-	void Update ()
+    private void Start()
+    {
+        Cursor.visible = false;
+    }
+
+    // Update is called once per frame
+    void Update ()
     {
 
         buttonPressed = Input.GetButton("Fire1");

@@ -50,6 +50,7 @@ public class Stage3Movement : MonoBehaviour {
 
 
     //Jump stuffs
+    public int maxJumps = 3;
     int multiJump = 0;
     bool jumping = false;
     public float jumpForce = 30f;
@@ -140,7 +141,7 @@ public class Stage3Movement : MonoBehaviour {
 
 
         //tells fixed update to jump if you aren't over your max jump amount
-        if (Input.GetButtonDown("Jump") && multiJump < 3 && !recovering)
+        if (Input.GetButtonDown("Jump") && multiJump < maxJumps && !recovering)
         {
             
             multiJump++;
