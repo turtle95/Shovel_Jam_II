@@ -13,6 +13,8 @@ TagManager:
   - Glowy
   - Temple
   - Lava
+  - FlyingWaypoint
+  - Hazzard
   layers:
   - Default
   - TransparentFX

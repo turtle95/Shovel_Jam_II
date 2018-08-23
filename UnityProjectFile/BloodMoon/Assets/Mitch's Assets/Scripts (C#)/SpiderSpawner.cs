@@ -13,22 +13,17 @@ public class SpiderSpawner : MonoBehaviour
     public bool stopTrickle = false;
     public int numberToTrickle = 20;
     public int numberToMassSpawn = 80;
-    public int spiderCountCurrent =0;
+    //public int spiderCountCurrent = 0;
     private List<GameObject> spiderTrickleList = new List<GameObject>();
     private List<GameObject> spiderMassList = new List<GameObject>();
     private bool clearingList = false;
     //[HideInInspector] public enum Clear { All, Trickle, Mass };
     private bool massSpawning = false;
 
-
-    //variable to give the spiders a size range
-    float sizeRange;
-
-
     // Use this for initialization
     void Start()
     {
-        if (trickleOnStart == true) StartCoroutine(TrickleSpawn());
+        //if (trickleOnStart == true) CheckTrickleNumbers();
         InvokeRepeating("CheckTrickleNumbers", 5f, 30f);
     }
 
@@ -60,11 +55,13 @@ public class SpiderSpawner : MonoBehaviour
             CancelInvoke("CheckTrickleNumbers");
         }
 
-        while (spiderCountCurrent < numberToTrickle)
+        while (spiderTrickleList.Count < numberToTrickle)
         {
             // cast a random ray to see if we hit land
             Vector3 randomPoint = Random.onUnitSphere * 10; //this is an imaginary sphere that will choose a random point to cast a ray from.
             Vector3 pointAwayFromPlanet = -300f * Vector3.Normalize(planet.position - randomPoint) + randomPoint; //find a point along the vector of planet.position and randomPoint but 300 units out.
+            yield return null;
+
             RaycastHit hit;
             if (Physics.Linecast(randomPoint, pointAwayFromPlanet, out hit))
             {
@@ -73,18 +70,19 @@ public class SpiderSpawner : MonoBehaviour
 
                 //Debug.DrawLine(randomPoint, hit.point, Color.red, 20f);
 
-                // we hit a spawnable area
-                Vector3 pointAboveGround = 1f * Vector3.Normalize(randomPoint - hit.point) + hit.point; //!! hit.point isn't always on ground
-                GameObject obj = Instantiate(spiderPrefab, pointAboveGround, Quaternion.identity);
-                sizeRange = Random.Range(1, 10);
-                obj.GetComponent<Transform>().localScale = new Vector3(sizeRange, sizeRange, sizeRange);
+                //---Spawn and Setup---
+                //Vector3 pointAboveGround = 1f * Vector3.Normalize(randomPoint - hit.point) + hit.point; //!! hit.point isn't always on ground
+                GameObject obj = Instantiate(spiderPrefab, hit.point + (transform.up * 0.1f), Quaternion.identity);
+                Vector3 _proj = transform.forward - (Vector3.Dot(transform.forward, hit.normal)) * hit.normal; //match normal
+                obj.transform.rotation = Quaternion.LookRotation(_proj, hit.normal);
+                //obj.transform.position = hit.point + transform.up * 0.1f; //stick to terrain
+
                 spiders spiderScript = obj.GetComponent<spiders>();
-               // SpiderCustomPhysics spiderScript = obj.GetComponent<SpiderCustomPhysics>();
-                spiderScript.planet = planet; //the planet that these spiders belong to
+                //spiderScript.planet = planet; //the planet that these spiders belong to
                 spiderScript.target = player.transform;
 
                 spiderTrickleList.Add(obj);
-                spiderCountCurrent++;
+                //spiderCountCurrent++;
             }
             yield return null;
         }
@@ -98,31 +96,32 @@ public class SpiderSpawner : MonoBehaviour
     private IEnumerator MassSpawning()
     {
         massSpawning = true;
-        while (spiderCountCurrent < numberToMassSpawn)
+        while (spiderMassList.Count < numberToMassSpawn)
         {
             // cast a random ray to see if we hit land
             Vector3 randomPoint = Random.onUnitSphere * 100; //this is an imaginary sphere that will choose a random point to cast a ray from.
             Vector3 pointAwayFromPlanet = -300f * Vector3.Normalize(planet.position - randomPoint) + randomPoint; //find a point along the vector of planet.position and randomPoint but 300 units out.
+            yield return null;
+
             RaycastHit hit;
             if (Physics.Linecast(randomPoint, pointAwayFromPlanet, out hit))
             {
                 //if (hit.transform.root.tag != "Planet")
                 //    yield break;
 
-                Debug.DrawLine(randomPoint, hit.point, Color.red, 20f);
+                //Debug.DrawLine(randomPoint, hit.point, Color.red, 20f);
 
-                // we hit a spawnable area
-                Vector3 pointAboveGround = 1f * Vector3.Normalize(randomPoint - hit.point) + hit.point; //!! hit.point isn't always on ground
-                GameObject obj = Instantiate(spiderPrefab, pointAboveGround, Quaternion.identity);
-                sizeRange = Random.Range(1, 20);
-                obj.GetComponent<Transform>().localScale = new Vector3(sizeRange, sizeRange, sizeRange);
-                spiders spiderScript = obj.GetComponent<spiders>();
-                //SpiderCustomPhysics spiderScript = obj.GetComponent<SpiderCustomPhysics>();
-                spiderScript.planet = planet; //the planet that these spiders belong to
+                //---Spawn and Setup---
+                //Vector3 pointAboveGround = 1f * Vector3.Normalize(randomPoint - hit.point) + hit.point; //!! hit.point isn't always on ground
+                GameObject obj = Instantiate(spiderPrefab, hit.point + (transform.up * 0.1f), Quaternion.identity);
+                Vector3 _proj = transform.forward - (Vector3.Dot(transform.forward, hit.normal)) * hit.normal; //match normal
+                obj.transform.rotation = Quaternion.LookRotation(_proj, hit.normal);
+
+                //spiderScript.planet = planet; //the planet that these spiders belong to
                 //spiderScript.target = player.transform;
 
                 spiderMassList.Add(obj);
-                spiderCountCurrent++;
+                //spiderCountCurrent++;
             }
             yield return null;
         }
@@ -161,7 +160,7 @@ public class SpiderSpawner : MonoBehaviour
         for (int i = spiderTrickleList.Count - 1; i >= 0; i--)
         {
             Destroy(spiderTrickleList[i]);
-            spiderCountCurrent--;
+            //spiderCountCurrent--;
             spiderTrickleList.Remove(spiderTrickleList[i]);
             yield return null;
         }
@@ -170,7 +169,7 @@ public class SpiderSpawner : MonoBehaviour
         for (int i = spiderMassList.Count - 1; i >= 0; i--)
         {
             Destroy(spiderMassList[i]);
-            spiderCountCurrent--;
+            //spiderCountCurrent--;
             spiderTrickleList.Remove(spiderMassList[i]);
             yield return null;
         }
@@ -186,12 +185,17 @@ public class SpiderSpawner : MonoBehaviour
         for (int i = spiderMassList.Count - 1; i >= 0; i--)
         {
             Destroy(spiderMassList[i]);
-            spiderCountCurrent--;
+            //spiderCountCurrent--;
             spiderTrickleList.Remove(spiderMassList[i]);
             yield return null;
         }
         spiderMassList.Clear();
 
         clearingList = false;
+    }
+
+    private void OnDisable()
+    {
+        DestroyAllSpiders();
     }
 }

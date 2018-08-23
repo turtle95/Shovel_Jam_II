@@ -146,7 +146,7 @@ public class SpiderCustomPhysics : MonoBehaviour {
             aggro = false;
             rb.velocity = Vector3.zero;
             rb.isKinematic = true;
-            sScript.spiderCountCurrent--;
+          //  sScript.spiderCountCurrent--;
             Destroy(gameObject, 1.5f);
         }
         aggro = true; //mob was hit and is now aggroed

@@ -33,7 +33,7 @@ public class BulletKill : MonoBehaviour {
             switch (bulletType)
             {
                 case 1:
-                    other.gameObject.GetComponent<spiders>().arrowHit(3);
+                    //other.gameObject.GetComponent<spiders>().arrowHit(3);
                     Destroy(this.gameObject);
                     Instantiate(burst, other.gameObject.transform.position, other.gameObject.transform.rotation);
                     break;
@@ -49,14 +49,14 @@ public class BulletKill : MonoBehaviour {
         }
     }
 
-    //For the croissant flame thrower, I'm thinking we should drop this one
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            other.gameObject.GetComponent<spiders>().burning = true;
-        }
-    }
+    ////For the croissant flame thrower, I'm thinking we should drop this one
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    if (other.gameObject.CompareTag("Enemy"))
+    //    {
+    //        other.gameObject.GetComponent<spiders>().burning = true;
+    //    }
+    //}
 
 
     IEnumerator KillBullet()
